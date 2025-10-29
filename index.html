@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chirag Khachane - AI Product Leader with 5+ years experience building ML products. Former Accenture analyst specializing in AI/ML, product strategy, and data analytics. Available for hire.">
+    <meta name="keywords" content="AI Product Manager, Machine Learning Engineer, Data Scientist, Product Strategy, AI Consultant, Hire AI Expert, AI Product Leader, Chirag Khachane">
+    <meta name="author" content="Chirag Khachane">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chiragkhachane.com">
+    <meta property="og:title" content="Chirag Khachane - AI Product Leader | Available for Hire">
+    <meta property="og:description" content="AI Product Leader with 5+ years building ML products for Fortune 500 companies and startups. Expertise in AI/ML, product strategy, and data analytics.">
+    <meta property="og:image" content="https://chiragkhachane.com/Chirag_Profile_Pic_Oct22.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://chiragkhachane.com">
+    <meta name="twitter:title" content="Chirag Khachane - AI Product Leader">
+    <meta name="twitter:description" content="AI Product Leader specializing in ML products and data-driven solutions. Available for hire.">
+    <meta name="twitter:image" content="https://chiragkhachane.com/Chirag_Profile_Pic_Oct22.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://chiragkhachane.com">
+    
+    <title>Chirag Khachane | AI Product Leader - Available for Hire</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Calendly link widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    
+    <!-- Styles - Critical CSS first -->
+    <link rel="stylesheet" href="styles.css?v=2026">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
+    
+    <!-- Three.js - Deferred loading -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP for advanced animations - Deferred loading -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <!-- Calendly link widget end -->
+</head>
+<body>
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CHIRAG<span class="highlight">KHACHANE</span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#design" class="nav-link">Design</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <!-- Left Side - Status and Title -->
+            <div class="hero-left">
+                <div class="project-status">
+                    <span class="status-dot"></span>
+                    Available for new opportunities
+                </div>
+                
+                <h1 class="hero-main-title">
+                    Khachane is solving problems through strategic AI solutions and compelling products
+                </h1>
+            </div>
+            
+            <!-- Center - Profile Image -->
+            <div class="hero-center">
+                <div class="hero-image-wrapper">
+                    <img src="CK_Webiste_image.png" alt="Chirag Khachane" class="hero-profile-image">
+                </div>
+            </div>
+            
+            <!-- Right Side - Description and CTA -->
+            <div class="hero-right">
+                <div class="hero-intro">
+                    <p>As an AI product leader with a strong focus on innovation and user experience, I collaborate closely with teams to craft seamless, data-driven solutions. A reliable partner in bringing ideas to life.</p>
+                </div>
+                
+                <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/chiragkhachane-ck71/30min'});return false;" class="btn-hire-me">
+                    Hire Me
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                About <span class="gradient-text">Me</span>
+            </h2>
+            
+            <!-- Why Me Section - Competitive Differentiation -->
+            <div class="why-me-section" data-aos="fade-up">
+                <h3 class="subsection-title">Why Work With Me</h3>
+                <div class="differentiators">
+                    <div class="diff-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="diff-icon">🎯</div>
+                        <h4>Business-First AI Solutions</h4>
+                        <p>I don't just build AI for the sake of technology—I build AI that solves real business problems and drives measurable value. Every project starts with understanding ROI and user impact.</p>
+                    </div>
+                    <div class="diff-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="diff-icon">⚡</div>
+                        <h4>Rapid Execution</h4>
+                        <p>From concept to production in weeks, not months. I've shipped multiple AI products from ideation to market launch, combining agile methodology with deep technical expertise.</p>
+                    </div>
+                    <div class="diff-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="diff-icon">🌉</div>
+                        <h4>Bridge Technical & Business</h4>
+                        <p>Fluent in both Python and boardroom language. I translate complex AI capabilities into clear business value, making me the perfect link between engineering teams and stakeholders.</p>
+                    </div>
+                    <div class="diff-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="diff-icon">🚀</div>
+                        <h4>Full-Stack Product Thinking</h4>
+                        <p>From data pipelines to user interfaces, I understand the entire product lifecycle. My hands-on technical background ensures I can guide teams through complex implementation challenges.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <p class="lead">
+                        I'm an AI Product Leader with a passion for transforming complex data into actionable insights and building intelligent solutions that drive business value.
+                    </p>
+                    <p>
+                        With expertise spanning <strong>AI/ML</strong>, <strong>Product Management</strong>, and <strong>Data Analytics</strong>, I've helped organizations leverage cutting-edge technology to solve real-world problems. My experience includes working with Fortune 500 companies and innovative startups, delivering data-driven products that enhance user experiences and drive growth.
+                    </p>
+                    <div class="expertise-areas">
+                        <div class="expertise-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI & Machine Learning</h4>
+                            <p>Building intelligent systems with NLP, Computer Vision, and Predictive Analytics</p>
+                        </div>
+                        <div class="expertise-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Product Strategy</h4>
+                            <p>Defining product vision, roadmap, and go-to-market strategies</p>
+                        </div>
+                        <div class="expertise-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Data Analytics</h4>
+                            <p>Extracting insights from complex datasets using advanced analytics</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-container" data-aos="fade-left">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-code"></i> Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">R</span>
+                                <span class="skill-tag">Java</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-robot"></i> AI/ML</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">Scikit-learn</span>
+                                <span class="skill-tag">NLP</span>
+                                <span class="skill-tag">Computer Vision</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-chart-bar"></i> Analytics</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Tableau</span>
+                                <span class="skill-tag">Power BI</span>
+                                <span class="skill-tag">Pandas</span>
+                                <span class="skill-tag">NumPy</span>
+                                <span class="skill-tag">Plotly</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-cloud"></i> Cloud & Tools</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                Professional <span class="gradient-text">Experience</span>
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                5+ years building AI products and driving data-driven transformation
+            </p>
+            
+            <div class="experience-grid">
+                <!-- Current Role -->
+                <div class="experience-card featured" data-aos="fade-up">
+                    <div class="experience-badge">Current</div>
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://mytreks.ai/favicon.ico" alt="MyTreks.ai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-brain" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>AI Product Manager</h3>
+                            <h4>MyTreks.ai</h4>
+                            <span class="experience-period">2024 - Present</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Leading product strategy and development of AI-powered trekking platform. Implementing ML algorithms for personalized recommendations and route optimization.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-rocket"></i>
+                            <span>Launched AI recommendation engine</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <span>Led cross-functional team of 8</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>30% increase in user engagement</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>AI/ML</span>
+                        <span>Product Strategy</span>
+                        <span>User Research</span>
+                        <span>Data Analytics</span>
+                    </div>
+                </div>
+                
+                <!-- Third Estate Ventures -->
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://logo.clearbit.com/thirdestateventures.com" alt="Third Estate Ventures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-chart-network" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>Senior Business Analyst</h3>
+                            <h4>Third Estate Ventures</h4>
+                            <span class="experience-period">2023 - 2024</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Drove data-driven decision making through GenAI implementations. Built predictive models for investment portfolio optimization.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-robot"></i>
+                            <span>Deployed GenAI analytics tools</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Optimized $50M+ portfolio</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>Generative AI</span>
+                        <span>Python</span>
+                        <span>Tableau</span>
+                        <span>SQL</span>
+                    </div>
+                </div>
+                
+                <!-- Primary Care IPA -->
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://logo.clearbit.com/primarycareipa.com" alt="Primary Care IPA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-hospital" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>Business Analyst</h3>
+                            <h4>Primary Care IPA</h4>
+                            <span class="experience-period">2022 - 2023</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Analyzed healthcare data to improve patient outcomes. Developed dashboards for clinical performance and population health.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Improved patient outcomes 25%</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Built real-time dashboards</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>Healthcare Analytics</span>
+                        <span>Power BI</span>
+                        <span>Data Modeling</span>
+                    </div>
+                </div>
+                
+                <!-- Accenture -->
+                <div class="experience-card" data-aos="fade-up">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-building" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>Business Analyst</h3>
+                            <h4>Accenture</h4>
+                            <span class="experience-period">2021 - 2022</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Worked with Fortune 500 clients on digital transformation initiatives. Led requirements gathering and stakeholder management.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-sitemap"></i>
+                            <span>Managed 3 enterprise clients</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>Optimized 15+ processes</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>Business Intelligence</span>
+                        <span>Process Optimization</span>
+                        <span>Stakeholder Management</span>
+                    </div>
+                </div>
+                
+                <!-- Compass Crew -->
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://logo.clearbit.com/compasscrew.com" alt="Compass Crew" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-compass" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>Product Strategy Consultant</h3>
+                            <h4>Compass Crew</h4>
+                            <span class="experience-period">2020 - 2021</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Advised startups on product strategy and operational excellence. Developed go-to-market strategies and product roadmaps.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Consulted 5 startups</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-map"></i>
+                            <span>Built 8 product roadmaps</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>Product Strategy</span>
+                        <span>Market Research</span>
+                        <span>Operations</span>
+                    </div>
+                </div>
+                
+                <!-- Atreya Innovations -->
+                <div class="experience-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://logo.clearbit.com/atreyainnovations.com" alt="Atreya Innovations" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-database" style="display:none;"></i>
+                        </div>
+                        <div class="experience-title-group">
+                            <h3>Data Scientist</h3>
+                            <h4>Atreya Innovations</h4>
+                            <span class="experience-period">2019 - 2020</span>
+                        </div>
+                    </div>
+                    <p class="experience-description">
+                        Built ML models for predictive analytics. Implemented data pipelines and automated reporting systems.
+                    </p>
+                    <div class="experience-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-brain"></i>
+                            <span>Deployed 10+ ML models</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>Automated 20+ reports</span>
+                        </div>
+                    </div>
+                    <div class="experience-tech">
+                        <span>Machine Learning</span>
+                        <span>Python</span>
+                        <span>Data Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                Featured <span class="gradient-text">Projects</span>
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Showcasing AI-powered solutions and data-driven products
+            </p>
+            
+            <!-- Project Category Selector -->
+            <div class="project-selector-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="ai">
+                        <div class="tab-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="tab-content">
+                            <h4>AI & Machine Learning</h4>
+                            <span class="tab-count">4 Projects</span>
+                        </div>
+                        <div class="tab-indicator"></div>
+                    </button>
+                    
+                    <button class="category-tab" data-category="product">
+                        <div class="tab-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="tab-content">
+                            <h4>Product & Development</h4>
+                            <span class="tab-count">3 Projects</span>
+                        </div>
+                        <div class="tab-indicator"></div>
+                    </button>
+                    
+                    <button class="category-tab" data-category="analytics">
+                        <div class="tab-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="tab-content">
+                            <h4>Analytics & Data Science</h4>
+                            <span class="tab-count">3 Projects</span>
+                        </div>
+                        <div class="tab-indicator"></div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- AI Projects -->
+            <div class="project-category active" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-brain"></i> AI & Machine Learning
+                </h3>
+                <div class="projects-grid">
+                    <!-- PulseScribe -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&q=80" alt="PulseScribe AI">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag ai-tag">AI</span>
+                                <span class="tag">Healthcare</span>
+                            </div>
+                            <h3>PulseScribe - Patient Notes AI</h3>
+                            <p>AI-powered medical dictation system that converts doctor-patient conversations into structured clinical notes, reducing documentation time by 70%.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Whisper AI</span>
+                                <span>GPT-4</span>
+                                <span>HIPAA Compliant</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tutor AI -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80" alt="Tutor AI">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag ai-tag">AI</span>
+                                <span class="tag">Education</span>
+                            </div>
+                            <h3>Tutor AI - Homework Assistant</h3>
+                            <p>Intelligent tutoring system that helps students with homework by providing step-by-step explanations and personalized learning paths.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>LangChain</span>
+                                <span>OpenAI</span>
+                                <span>Streamlit</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teaching Assistant AI -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&q=80" alt="Teaching Assistant AI">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag ai-tag">AI</span>
+                                <span class="tag">NLP</span>
+                            </div>
+                            <h3>Teaching Assistant AI</h3>
+                            <p>Intelligent AI teaching assistant using advanced NLP to provide instant, personalized learning support 24/7 for students.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Transformers</span>
+                                <span>LangChain</span>
+                                <span>Vector DB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- TRAVELLERA -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop&q=80" alt="TRAVELLERA">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag ai-tag">AI</span>
+                                <span class="tag">NLP</span>
+                            </div>
+                            <h3>TRAVELLERA</h3>
+                            <p>AI travel assistant providing personalized recommendations, itinerary planning, and local insights using natural language processing.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>NLP</span>
+                                <span>DialogFlow</span>
+                                <span>APIs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Projects -->
+            <div class="project-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-rocket"></i> Product & Development
+                </h3>
+                <div class="projects-grid">
+                    <!-- Scheduling and Payroll App -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80" alt="Scheduling and Payroll App">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag product-tag">Product</span>
+                                <span class="tag">Full Stack</span>
+                            </div>
+                            <h3>Scheduling & Payroll App</h3>
+                            <p>Comprehensive workforce management solution that streamlines employee scheduling, time tracking, and automated payroll processing for businesses.</p>
+                            <div class="project-tech">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>PostgreSQL</span>
+                                <span>AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- n8n Automations -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop&q=80" alt="n8n Automations">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag product-tag">Product</span>
+                                <span class="tag">Automation</span>
+                            </div>
+                            <h3>n8n Workflow Automations</h3>
+                            <p>Custom business process automation workflows integrating multiple platforms to eliminate manual tasks and improve operational efficiency.</p>
+                            <div class="project-tech">
+                                <span>n8n</span>
+                                <span>API Integration</span>
+                                <span>Webhooks</span>
+                                <span>Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Neuroquest -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop&q=80" alt="Neuroquest">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag product-tag">Product</span>
+                                <span class="tag">AI Agents</span>
+                            </div>
+                            <h3>Neuroquest</h3>
+                            <p>Advanced AI-powered platform leveraging intelligent agents and retrieval-augmented generation to deliver context-aware solutions and automated workflows.</p>
+                            <div class="project-tech">
+                                <span>RAG</span>
+                                <span>Vector DB</span>
+                                <span>LLMs</span>
+                                <span>AI Agents</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics Projects -->
+            <div class="project-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-chart-line"></i> Analytics & Data Science
+                </h3>
+                <div class="projects-grid">
+                    <!-- DataViz AI -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80" alt="DataViz AI Dashboard">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag analytics-tag">Analytics</span>
+                                <span class="tag">AI</span>
+                            </div>
+                            <h3>DataViz AI</h3>
+                            <p>AI system that automatically generates insights and creates interactive dashboards from raw data using machine learning pattern recognition.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Scikit-learn</span>
+                                <span>Plotly</span>
+                                <span>Flask</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Real Estate Analytics -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80" alt="Real Estate Analytics">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag analytics-tag">Analytics</span>
+                                <span class="tag">ML</span>
+                            </div>
+                            <h3>Real Estate Analytics</h3>
+                            <p>Comprehensive market analysis platform with predictive pricing models and investment opportunity identification using machine learning.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Scikit-learn</span>
+                                <span>Tableau</span>
+                                <span>Jupyter</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Healthcare Analytics -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=600&h=400&fit=crop&q=80" alt="Healthcare Analytics">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag analytics-tag">Analytics</span>
+                                <span class="tag">Healthcare</span>
+                            </div>
+                            <h3>Healthcare Analytics Platform</h3>
+                            <p>Data-driven platform for patient outcome prediction, resource optimization, and clinical performance monitoring.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Power BI</span>
+                                <span>SQL</span>
+                                <span>R</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Design Showcase Section -->
+    <section id="design" class="design-showcase">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                Design <span class="gradient-text">Showcase</span>
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Interactive prototypes and product designs
+            </p>
+            
+            <div class="figma-showcase" data-aos="fade-up" data-aos-delay="200">
+                <div class="showcase-header">
+                    <div class="showcase-title">
+                        <i class="fas fa-mountain"></i>
+                        <h3>MyTreks.ai - AI-Powered Trekking Platform</h3>
+                    </div>
+                    <p class="showcase-description">
+                        Complete product design and user experience for an AI-driven trekking recommendation platform. Features personalized route planning, community engagement, and intelligent itinerary generation.
+                    </p>
+                    <div class="showcase-tags">
+                        <span class="showcase-tag">Product Design</span>
+                        <span class="showcase-tag">UI/UX</span>
+                        <span class="showcase-tag">Figma</span>
+                        <span class="showcase-tag">Interactive Prototype</span>
+                    </div>
+                </div>
+                
+                <div class="figma-embed-container">
+                    <iframe 
+                        class="figma-prototype" 
+                        width="800" 
+                        height="450" 
+                        src="https://embed.figma.com/proto/rPQ8CLat7ddtmYNgA39F6G/My-Treks.ai?node-id=6992-94020&p=f&scaling=min-zoom&content-scaling=fixed&page-id=6992%3A83433&starting-point-node-id=6992%3A85112&show-proto-sidebar=1&embed-host=share" 
+                        allowfullscreen>
+                    </iframe>
+                    <div class="iframe-overlay">
+                        <button class="view-prototype-btn">
+                            <i class="fas fa-expand"></i>
+                            Click to interact with prototype
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="showcase-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile-First Design</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>User-Centric Experience</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-brain"></i>
+                        <span>AI-Powered Features</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-compass"></i>
+                        <span>Interactive Navigation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                Let's <span class="gradient-text">Connect</span>
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Have a project in mind? Let's discuss how we can work together
+            </p>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:chiragkhachane.ck71@gmail.com">chiragkhachane.ck71@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <a href="tel:+17166171669">+1 (716) 617-1669</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>LinkedIn</h4>
+                            <a href="https://linkedin.com/in/chiragkhachane" target="_blank">linkedin.com/in/chiragkhachane</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Chirag Khachane</h3>
+                    <p>AI Product Leader | Driving Innovation Through Data & Intelligence</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#design">Design</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/chiragkhachane" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/chiragkhachane" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/chirag_khachane" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:chiragkhachane.ck71@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Chirag Khachane. All rights reserved. | Designed with ❤️ and AI</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Gemini AI Assistant (Floating Robot) -->
+    <div class="ai-assistant" id="aiAssistant">
+        <div class="assistant-toggle" id="assistantToggle">
+            <div class="robot-icon">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <div class="pulse-ring"></div>
+        </div>
+        <div class="assistant-chat" id="assistantChat">
+            <div class="chat-header">
+                <div class="chat-header-content">
+                    <i class="fas fa-user-astronaut"></i>
+                    <div>
+                        <h4>Gemini AI Assistant</h4>
+                        <span class="status">Powered by Google Gemini</span>
+                    </div>
+                </div>
+                <button class="close-chat" id="closeChat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>👋 Hi! I'm Chirag's AI assistant powered by Google Gemini. Ask me anything about his experience, projects, or skills!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Ask me anything...">
+                <button id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="api-key-setup" id="apiKeySetup">
+                <p>🔑 Please add your Google Gemini API key to enable the assistant</p>
+                <div class="api-key-input-group">
+                    <input type="password" id="apiKeyInput" placeholder="Enter API key...">
+                    <button id="saveApiKey">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts - Deferred loading for better performance -->
+    <script defer src="script.js"></script>
+</body>
+</html>

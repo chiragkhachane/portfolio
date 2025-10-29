@@ -1,0 +1,28 @@
+{
+  "name": "chirag-khachane-portfolio",
+  "version": "1.0.0",
+  "description": "Modern 3D AI Portfolio Website with Google Gemini Integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 8080",
+    "deploy": "echo 'Push to GitHub and enable GitHub Pages in repository settings'"
+  },
+  "keywords": [
+    "portfolio",
+    "ai",
+    "machine-learning",
+    "data-science",
+    "product-management",
+    "threejs",
+    "gsap",
+    "google-gemini"
+  ],
+  "author": "Chirag Khachane <chiragkhachane.ck71@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chiragkhachane/portfolio"
+  },
+  "homepage": "https://chiragkhachane.github.io/portfolio"
+}
