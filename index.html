@@ -38,7 +38,7 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     
     <!-- Styles - Critical CSS first -->
-    <link rel="stylesheet" href="styles.css?v=2026">
+    <link rel="stylesheet" href="styles.css?v=2038">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
@@ -758,13 +758,17 @@
                 </div>
                 
                 <div class="figma-embed-container">
-                    <iframe 
-                        class="figma-prototype" 
-                        width="800" 
-                        height="450" 
-                        src="https://embed.figma.com/proto/rPQ8CLat7ddtmYNgA39F6G/My-Treks.ai?node-id=6992-94020&p=f&scaling=min-zoom&content-scaling=fixed&page-id=6992%3A83433&starting-point-node-id=6992%3A85112&show-proto-sidebar=1&embed-host=share" 
-                        allowfullscreen>
-                    </iframe>
+                    <div class="iphone-frame">
+                        <div class="iphone-notch"></div>
+                        <div class="iphone-screen">
+                            <iframe 
+                                class="figma-prototype" 
+                                src="https://embed.figma.com/proto/rPQ8CLat7ddtmYNgA39F6G/My-Treks.ai?node-id=6992-85112&scaling=scale-down&page-id=6992%3A83433&starting-point-node-id=6992%3A85112&embed-host=share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="iphone-home-indicator"></div>
+                    </div>
                     <div class="iframe-overlay">
                         <button class="view-prototype-btn">
                             <i class="fas fa-expand"></i>
@@ -895,7 +899,7 @@
         </div>
     </footer>
     
-    <!-- Gemini AI Assistant (Floating Robot) -->
+    <!-- AI Personal Assistant (Floating Robot) -->
     <div class="ai-assistant" id="aiAssistant">
         <div class="assistant-toggle" id="assistantToggle">
             <div class="robot-icon">
@@ -908,8 +912,8 @@
                 <div class="chat-header-content">
                     <i class="fas fa-user-astronaut"></i>
                     <div>
-                        <h4>Gemini AI Assistant</h4>
-                        <span class="status">Powered by Google Gemini</span>
+                        <h4>Chirag's Personal Assistant</h4>
+                        <span class="status">Online • Ready to Help</span>
                     </div>
                 </div>
                 <button class="close-chat" id="closeChat">
@@ -922,7 +926,7 @@
                         <i class="fas fa-user-astronaut"></i>
                     </div>
                     <div class="message-content">
-                        <p>👋 Hi! I'm Chirag's AI assistant powered by Google Gemini. Ask me anything about his experience, projects, or skills!</p>
+                        <p>👋 Hi! I'm Chirag's Personal Assistant. Ask me anything about his experience, projects, or skills!</p>
                     </div>
                 </div>
             </div>
