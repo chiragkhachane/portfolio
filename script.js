@@ -804,6 +804,49 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// ==================== FIGMA PROTOTYPE ZOOM CONTROLS ====================
+function initPrototypeZoom() {
+    const figmaPrototype = document.getElementById('figmaPrototype');
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const resetZoomBtn = document.getElementById('resetZoom');
+    const zoomLevelDisplay = document.getElementById('zoomLevel');
+    
+    if (!figmaPrototype || !zoomInBtn || !zoomOutBtn || !resetZoomBtn) return;
+    
+    let currentZoom = 100;
+    const zoomStep = 25;
+    const minZoom = 50;
+    const maxZoom = 200;
+    
+    function updateZoom(newZoom) {
+        currentZoom = Math.max(minZoom, Math.min(maxZoom, newZoom));
+        figmaPrototype.style.transform = `scale(${currentZoom / 100})`;
+        figmaPrototype.style.transformOrigin = 'top center';
+        zoomLevelDisplay.textContent = `${currentZoom}%`;
+        
+        // Disable buttons at limits
+        zoomOutBtn.disabled = currentZoom <= minZoom;
+        zoomInBtn.disabled = currentZoom >= maxZoom;
+        
+        // Visual feedback for disabled state
+        zoomOutBtn.style.opacity = currentZoom <= minZoom ? '0.5' : '1';
+        zoomInBtn.style.opacity = currentZoom >= maxZoom ? '0.5' : '1';
+    }
+    
+    zoomInBtn.addEventListener('click', () => updateZoom(currentZoom + zoomStep));
+    zoomOutBtn.addEventListener('click', () => updateZoom(currentZoom - zoomStep));
+    resetZoomBtn.addEventListener('click', () => updateZoom(100));
+    
+    // Initialize
+    updateZoom(100);
+}
+
+// Initialize prototype zoom on load
+window.addEventListener('load', () => {
+    initPrototypeZoom();
+});
+
 // Console message
 console.log('%c👋 Hey there!', 'color: #6366f1; font-size: 24px; font-weight: bold;');
 console.log('%cLooking at the code? I like your style! 🚀', 'color: #ec4899; font-size: 16px;');
