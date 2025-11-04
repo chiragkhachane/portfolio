@@ -1,41 +1,182 @@
 // ==================== INITIALIZATION ====================
-let isThreeJSLoaded = false;
+console.log('Script.js v2067 loaded successfully');
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Critical path - load immediately
-    initTypingEffect();
-    initNavigation();
+let isThreeJSLoaded = false;
+let pageFullyLoaded = false;
+
+// More robust initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePortfolio);
+} else {
+    initializePortfolio();
+}
+
+function initializePortfolio() {
+    console.log('Initializing portfolio...');
     
-    // Defer heavy animations until page is loaded
+    // Critical path - load immediately with error handling
+    try {
+        initTypingEffect();
+        console.log('✓ Typing effect initialized');
+    } catch (error) {
+        console.error('Typing effect failed:', error);
+    }
+    
+    try {
+        initNavigation();
+        console.log('✓ Navigation initialized');
+    } catch (error) {
+        console.error('Navigation failed:', error);
+    }
+    
+    // Mark page as loaded after a reasonable timeout to prevent infinite loading
+    setTimeout(() => {
+        pageFullyLoaded = true;
+        console.log('✓ Page load timeout completed - forcing ready state');
+    }, 3000); // 3 seconds max wait
+    
+    // Defer heavy features until page is fully loaded
     window.addEventListener('load', () => {
-        initParticles();
-        initScrollAnimations();
-        initAIAssistant();
-        initContactForm();
-        initAOS();
-        initProjectMeter();
+        pageFullyLoaded = true;
+        console.log('Page fully loaded, initializing heavy features...');
         
-        // Initialize Three.js only after everything else is loaded
+        try {
+            initParticles();
+            console.log('✓ Particles initialized');
+        } catch (error) {
+            console.error('Particles failed:', error);
+        }
+        
+        try {
+            initScrollAnimations();
+            console.log('✓ Scroll animations initialized');
+        } catch (error) {
+            console.error('Scroll animations failed:', error);
+        }
+        
+        try {
+            initAIAssistant();
+            console.log('✓ AI Assistant initialized');
+        } catch (error) {
+            console.error('AI Assistant failed:', error);
+        }
+        
+        try {
+            initContactForm();
+            console.log('✓ Contact form initialized');
+        } catch (error) {
+            console.error('Contact form failed:', error);
+        }
+        
+        try {
+            initPrototypeZoom();
+            console.log('✓ Prototype zoom initialized');
+        } catch (error) {
+            console.error('Prototype zoom failed:', error);
+        }
+        
+        try {
+            initLazyFigmaLoad();
+            console.log('✓ Lazy Figma load initialized');
+        } catch (error) {
+            console.error('Lazy Figma load failed:', error);
+        }
+        
+        // Only initialize 3D if Three.js loaded AND user hasn't scrolled
+        if (typeof THREE !== 'undefined') {
+            try {
+                init3DBackground();
+                console.log('✓ 3D background initialized');
+            } catch (error) {
+                console.error('3D background failed:', error);
+                console.log('Continuing without 3D background...');
+            }
+        } else {
+            console.log('⚠ Three.js not loaded - skipping 3D background (site will work fine without it)');
+        }
+        
+        console.log('✓ Portfolio initialization complete');
+    });
+}
+        } catch (error) {
+            console.error('AI Assistant failed:', error);
+        }
+        
+        try {
+            initContactForm();
+            console.log('✓ Contact form initialized');
+        } catch (error) {
+            console.error('Contact form failed:', error);
+        }
+        
+        try {
+            initAOS();
+            console.log('✓ AOS initialized');
+        } catch (error) {
+            console.error('AOS failed:', error);
+        }
+        
+        try {
+            initProjectMeter();
+            console.log('✓ Project meter initialized');
+        } catch (error) {
+            console.error('Project meter failed:', error);
+        }
+        
+        try {
+            initPrototypeZoom();
+            console.log('✓ Prototype zoom initialized');
+        } catch (error) {
+            console.error('Prototype zoom failed:', error);
+        }
+        
+        // Initialize Three.js only if available
         if (typeof THREE !== 'undefined') {
             isThreeJSLoaded = true;
-            setTimeout(() => initThreeJS(), 100);
+            setTimeout(() => {
+                try {
+                    initThreeJS();
+                    console.log('✓ Three.js initialized');
+                } catch (error) {
+                    console.error('Three.js failed:', error);
+                }
+            }, 100);
+        } else {
+            console.log('⚠ Three.js not loaded, skipping 3D background');
         }
+        
+        console.log('Portfolio initialization complete');
     });
-});
+}
 
 // ==================== THREE.JS 3D BACKGROUND ====================
-function initThreeJS() {
-    if (!isThreeJSLoaded) return;
+function init3DBackground() {
+    // Check if Three.js is available
+    if (typeof THREE === 'undefined') {
+        console.log('⚠ Three.js not available, skipping 3D background');
+        return;
+    }
     
-    const canvas = document.getElementById('bg-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false }); // Disabled antialiasing for performance
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
-    
-    camera.position.z = 30;
+    try {
+        const canvas = document.getElementById('bg-canvas');
+        if (!canvas) {
+            console.warn('Canvas element not found');
+            return;
+        }
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas, 
+            alpha: true, 
+            antialias: false,
+            powerPreference: "low-power" // Optimize for battery
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Limit for performance
+        
+        camera.position.z = 30;
     
     // Reduced number of shapes from 15 to 8 for performance
     const geometries = [
@@ -329,50 +470,59 @@ function updateProgressBar() {
 window.addEventListener('scroll', updateProgressBar);
 window.addEventListener('resize', updateProgressBar);
 
-// ==================== AI ASSISTANT (GEMINI) ====================
+// ==================== AI ASSISTANT (SMART CHATBOT) ====================
 function initAIAssistant() {
+    console.log('🤖 Initializing AI Assistant...');
+    
     const assistantToggle = document.getElementById('assistantToggle');
     const assistantChat = document.getElementById('assistantChat');
     const closeChat = document.getElementById('closeChat');
     const sendMessage = document.getElementById('sendMessage');
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
-    const apiKeyInput = document.getElementById('apiKeyInput');
-    const saveApiKey = document.getElementById('saveApiKey');
-    const apiKeySetup = document.getElementById('apiKeySetup');
     
-    let geminiApiKey = 'AIzaSyCrEy-ewnKsLN6O9lzILIMqupkr5PVAPXM'; // Pre-configured API key
+    // Debug logging
+    console.log('Toggle button:', assistantToggle);
+    console.log('Chat window:', assistantChat);
     
-    // Also check localStorage for user override
-    const storedKey = localStorage.getItem('gemini_api_key');
-    if (storedKey) {
-        geminiApiKey = storedKey;
+    if (!assistantToggle) {
+        console.error('❌ Assistant toggle button not found!');
+        return;
     }
     
-    // Hide API key setup since we have a default key
-    if (geminiApiKey && !storedKey) {
-        apiKeySetup.style.display = 'none';
+    if (!assistantChat) {
+        console.error('❌ Assistant chat window not found!');
+        return;
     }
     
-    // Toggle chat window
-    assistantToggle.addEventListener('click', () => {
+    console.log('✅ Setting up event listeners...');
+    
+    // Toggle chat window - IMPROVED
+    assistantToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('🖱️ Toggle clicked!');
+        
+        const isActive = assistantChat.classList.contains('active');
         assistantChat.classList.toggle('active');
-    });
-    
-    closeChat.addEventListener('click', () => {
-        assistantChat.classList.remove('active');
-    });
-    
-    // Save API key
-    saveApiKey.addEventListener('click', () => {
-        const apiKey = apiKeyInput.value.trim();
-        if (apiKey) {
-            geminiApiKey = apiKey;
-            localStorage.setItem('gemini_api_key', apiKey);
-            apiKeySetup.classList.remove('active');
-            addBotMessage('API key saved! I\'m ready to help you. Ask me anything about Chirag\'s experience, projects, or skills!');
+        
+        console.log('Chat is now:', assistantChat.classList.contains('active') ? 'OPEN' : 'CLOSED');
+        
+        // Add welcome message on first open
+        if (!isActive && chatMessages.children.length === 0) {
+            addBotMessage("👋 Hey there! I'm Chirag's AI assistant. I can tell you about his experience, projects, skills, and availability. What would you like to know?");
         }
     });
+    
+    // Close chat
+    if (closeChat) {
+        closeChat.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Closing chat...');
+            assistantChat.classList.remove('active');
+        });
+    }
     
     // Send message
     function sendUserMessage() {
@@ -382,23 +532,48 @@ function initAIAssistant() {
         addUserMessage(message);
         chatInput.value = '';
         
-        // If no API key, show message
-        if (!geminiApiKey) {
-            apiKeySetup.classList.add('active');
-            addBotMessage('Please add your Google Gemini API key first to enable the AI assistant.');
-            return;
+        // Hide prompts after first message
+        const quickPrompts = document.getElementById('quickPrompts');
+        if (quickPrompts) {
+            quickPrompts.style.display = 'none';
         }
         
-        // Process message with Gemini
-        processWithGemini(message);
+        // Process message with intelligent responses
+        setTimeout(() => {
+            const response = getIntelligentResponse(message);
+            addBotMessage(response);
+        }, 600);
     }
     
-    sendMessage.addEventListener('click', sendUserMessage);
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+    if (sendMessage) {
+        sendMessage.addEventListener('click', (e) => {
+            e.preventDefault();
             sendUserMessage();
-        }
+        });
+    }
+    
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendUserMessage();
+            }
+        });
+    }
+    
+    // Handle quick prompt clicks
+    document.querySelectorAll('.prompt-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const prompt = btn.getAttribute('data-prompt');
+            if (chatInput) {
+                chatInput.value = prompt;
+                sendUserMessage();
+            }
+        });
     });
+    
+    console.log('✅ AI Assistant fully initialized!');
     
     // Add user message to chat
     function addUserMessage(message) {
@@ -425,197 +600,79 @@ function initAIAssistant() {
                 <i class="fas fa-robot"></i>
             </div>
             <div class="message-content">
-                <p>${message}</p>
+                <p>${message.replace(/\n/g, '<br>')}</p>
             </div>
         `;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Process message with Gemini API
-    async function processWithGemini(userMessage) {
-        // Show thinking indicator
-        const thinkingDiv = document.createElement('div');
-        thinkingDiv.className = 'message bot-message thinking';
-        thinkingDiv.innerHTML = `
-            <div class="message-avatar">
-                <i class="fas fa-user-astronaut"></i>
-            </div>
-            <div class="message-content">
-                <p class="thinking-dots">Thinking<span>.</span><span>.</span><span>.</span></p>
-            </div>
-        `;
-        chatMessages.appendChild(thinkingDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        try {
-            // Try Gemini API first if available
-            if (geminiApiKey && geminiApiKey !== 'AIzaSyCrEy-ewnKsLN6O9lzILIMqupkr5PVAPXM') {
-                await callGeminiAPI(userMessage, thinkingDiv);
-            } else {
-                // Use intelligent fallback responses
-                setTimeout(() => {
-                    chatMessages.removeChild(thinkingDiv);
-                    const response = getIntelligentResponse(userMessage);
-                    addBotMessage(response);
-                }, 800);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            chatMessages.removeChild(thinkingDiv);
-            const response = getIntelligentResponse(userMessage);
-            addBotMessage(response);
-        }
-    }
-    
-    // Intelligent fallback responses
+    // Intelligent response system
     function getIntelligentResponse(message) {
         const msg = message.toLowerCase();
         
+        // AI Experience (matches quick prompt)
+        if (msg.includes('ai experience') || msg.includes("chirag's ai")) {
+            return "🤖 **AI Leadership Experience:**\n\n**Current Roles:**\n• AI & Business Solutions Architect at Highland Primary Care - Building HIPAA-compliant GenAI patient solutions\n• AI Product Manager at MyTreks.ai - Leading career guidance AI platform\n\n**Key Achievements:**\n✅ Deployed GenAI screening agents serving 55,000+ patients\n✅ Built LLM-powered analytics platforms\n✅ 100% HIPAA compliance track record\n✅ Expertise in GPT-4, Claude, Gemini, Vector DBs\n\nI transform AI concepts into production systems with measurable ROI!";
+        }
+        
+        // Projects (matches quick prompt)
+        if (msg.includes('projects has') || msg.includes('worked on')) {
+            return "� **Featured Projects:**\n\n1. **DataViz AI** - NLP-powered automated data visualization\n2. **Teaching Assistant AI** - Educational chatbot for personalized learning\n3. **Insight Bridge** - GPT-4 data analysis platform\n4. **Healthcare Analytics** - Patient outcome prediction (55K+ patients)\n5. **Real Estate Analytics** - Predictive pricing models\n\nAll projects focus on solving real business problems with measurable impact. Want to see demos or learn more about any specific project?";
+        }
+        
+        // Skills (matches quick prompt)
+        if (msg.includes('key skills') || (msg.includes('skills') && msg.includes('chirag'))) {
+            return "🛠️ **Technical Skills:**\n\n**AI/ML:** Python, TensorFlow, PyTorch, LLMs (GPT-4, Claude, Gemini), Vector DBs, NLP, Computer Vision\n\n**Analytics:** Tableau, Power BI, SQL, Pandas, Advanced Statistics\n\n**Cloud & Tools:** AWS, Docker, Git, Agile, Jira\n\n**Product:** Strategy, User Research, Design Thinking, Rapid Prototyping\n\n**Special Strength:** Bridging technical execution with business strategy - I speak both languages fluently!";
+        }
+        
+        // Healthcare (matches quick prompt)
+        if (msg.includes('healthcare experience') || (msg.includes('healthcare') && msg.includes('chirag'))) {
+            return "🏥 **Healthcare AI Expertise:**\n\n**At Highland Primary Care:**\n✅ Architecting HIPAA-compliant patient-facing AI solutions\n✅ Deployed GenAI agents for patient screening & scheduling\n✅ Integrated EMR/CRM systems (100% compliance)\n✅ Improved 55,000+ patient outcomes\n\n**Impact:**\n• Streamlined care coordination\n• Reduced operational costs\n• Enhanced patient experience\n• Zero compliance violations\n\nI understand both the technical challenges and regulatory requirements in healthcare AI!";
+        }
+        
+        // Education (matches quick prompt)
+        if (msg.includes('educational background') || (msg.includes('education') && msg.includes('chirag'))) {
+            return "🎓 **Education:**\n\n**MS in Industrial & Systems Engineering**\nUniversity at Buffalo (2021-2023)\n• GPA: 3.8/4.0\n• Focus: Data Analytics, Operations Research, AI Applications\n\n**BE in Mechanical Engineering**\nUniversity of Mumbai (2016-2020)\n• GPA: 3.7/4.0\n• Focus: Systems Design, Engineering Analysis\n\n**Certifications:**\n• Advanced AI & ML specializations\n• Product Management certifications\n\nI combine engineering fundamentals with cutting-edge AI expertise!";
+        }
+        
+        // Contact (matches quick prompt)
+        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('phone') || msg.includes('connect')) {
+            return "📧 **Let's Connect!**\n\n✉️ Email: chiragkhachane.ck71@gmail.com\n📱 Phone: +1 (716) 617-1669\n💼 LinkedIn: linkedin.com/in/chiragkhachane\n💻 GitHub: github.com/chiragkhachane\n📅 Schedule a call: [Book time via Calendly]\n\n🎯 **Currently Available** for AI/Product leadership roles!\n\nI typically respond within 24 hours. Looking forward to connecting!";
+        }
+        
         // Hiring & Availability
         if (msg.includes('hire') || msg.includes('available') || msg.includes('work') || msg.includes('looking')) {
-            return "🎯 Chirag is actively looking for exciting AI/Product leadership opportunities! He specializes in transforming AI concepts into shipped products. You can reach him at chiragkhachane.ck71@gmail.com or +1 (716) 617-1669 to discuss how he can help your team.";
+            return "� **Yes! I'm actively seeking opportunities!**\n\nI specialize in:\n• AI Product Leadership\n• Building 0→1 AI products\n• Cross-functional team management\n• Rapid MVP development (weeks, not months)\n\n**Proven Track Record:**\n✅ $5M+ in cost savings delivered\n✅ 55K+ users impacted\n✅ Multiple AI products shipped to production\n\nLet's discuss how I can drive AI innovation for your organization!\n\n📧 chiragkhachane.ck71@gmail.com";
         }
         
-        // Experience
+        // General Experience
         if (msg.includes('experience') || msg.includes('background') || msg.includes('career')) {
-            return "💼 Chirag brings 5+ years of AI/Product leadership experience. Currently AI Product Manager at MyTreks.ai, previously Senior Business Analyst at Third Estate Ventures and Business Analyst at Accenture. He's led cross-functional teams, shipped AI products, and driven measurable business impact across healthcare, fintech, and SaaS.";
+            return "💼 **5+ Years of AI/Product Leadership:**\n\n**Current (2024-Present):**\n• AI Architect at Highland Primary Care\n• AI Product Manager at MyTreks.ai\n\n**Previous:**\n• Lead Business Analyst at Third Estate Ventures\n• Business Analyst at Accenture (Fortune 500)\n• Product roles at Persistent Systems & Atreya\n\n**Impact Delivered:**\n💰 $5M+ cost savings\n👥 55,000+ users impacted\n🎯 100% project delivery rate\n\nI turn AI concepts into shipped products!";
         }
         
-        // Skills
+        // General Skills
         if (msg.includes('skill') || msg.includes('technical') || msg.includes('stack') || msg.includes('tools')) {
-            return "🛠️ Chirag's tech stack includes Python, TensorFlow, PyTorch, Scikit-learn for ML; Tableau & Power BI for analytics; AWS & Docker for cloud; plus strong product management skills in market research, user research, and design thinking. He bridges technical and business seamlessly!";
-        }
-        
-        // Projects
-        if (msg.includes('project') || msg.includes('portfolio') || msg.includes('built') || msg.includes('created')) {
-            return "🚀 Check out Chirag's impressive projects: DataViz AI (automated data visualization), Teaching Assistant AI (NLP-powered education tool), Insight Bridge (GPT-4 data analysis), Real Estate Analytics (predictive pricing), and Healthcare Analytics (patient outcome prediction). All solving real business problems with AI!";
-        }
-        
-        // AI/ML specific
-        if (msg.includes('ai') || msg.includes('machine learning') || msg.includes('ml') || msg.includes('nlp') || msg.includes('deep learning')) {
-            return "🤖 Chirag specializes in practical AI applications! He's built NLP systems, computer vision solutions, and predictive models that actually ship and drive business value. His approach: understand the business problem first, then apply the right AI/ML techniques—not the other way around.";
+            return "�️ **Tech Stack:**\n\n**AI/ML:** Python, TensorFlow, PyTorch, LLMs, GenAI, Vector DBs\n**Analytics:** Tableau, Power BI, SQL, Pandas\n**Cloud:** AWS, Docker, Git\n**Product:** Strategy, User Research, Agile, Design Thinking\n\n**Unique Strength:** I bridge technical execution with business strategy seamlessly - translating between engineers and executives!";
         }
         
         // Product Management
         if (msg.includes('product') || msg.includes('pm') || msg.includes('roadmap') || msg.includes('strategy')) {
-            return "📊 As an AI Product Manager, Chirag excels at product strategy, user research, market analysis, and cross-functional leadership. He's known for rapid execution—turning ideas into MVPs in weeks, not months. He speaks both engineer and executive fluently!";
-        }
-        
-        // Education
-        if (msg.includes('education') || msg.includes('degree') || msg.includes('study') || msg.includes('university')) {
-            return "🎓 Chirag studied at SUNY Buffalo, where he built a strong foundation in data science and business analytics. But his real education comes from shipping products, leading teams, and solving complex problems in fast-paced startup environments!";
-        }
-        
-        // Contact
-        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('phone') || msg.includes('connect')) {
-            return "📧 Ready to connect? Email Chirag at chiragkhachane.ck71@gmail.com or call +1 (716) 617-1669. You can also connect on LinkedIn at linkedin.com/in/chiragkhachane or check his GitHub at github.com/chiragkhachane. He responds fast!";
-        }
-        
-        // Location
-        if (msg.includes('location') || msg.includes('where') || msg.includes('based') || msg.includes('remote')) {
-            return "📍 Chirag is based in Buffalo, NY and open to remote opportunities worldwide. He's worked successfully with distributed teams across time zones and brings strong async communication skills!";
-        }
-        
-        // Why hire
-        if (msg.includes('why') || msg.includes('different') || msg.includes('unique') || msg.includes('stand out')) {
-            return "⭐ What makes Chirag different? (1) Business-first AI thinking—no solutions looking for problems (2) Rapid execution—ships MVPs in weeks (3) Bridge tech & business—translates between both worlds (4) Full-stack product thinking—from strategy to analytics to launch. He gets stuff done!";
+            return "📊 **AI Product Management:**\n\n**Expertise:**\n• Product strategy & roadmapping\n• User research & market validation\n• Cross-functional team leadership\n• Agile development & rapid iteration\n• Data-driven decision making\n\n**Philosophy:** Ship fast, iterate faster. I turn ideas into MVPs in weeks, not months!\n\n**Results:** 100% on-time delivery, $5M+ value created";
         }
         
         // Greetings
         if (msg.includes('hello') || msg.includes('hi ') || msg.includes('hey') || msg === 'hi' || msg === 'hey') {
-            return "👋 Hey there! I'm Chirag's AI assistant. I can tell you about his experience, projects, skills, and availability. What would you like to know? (Or just ask: 'Is Chirag available for hire?')";
+            return "👋 **Hey there!**\n\nI'm Chirag's AI assistant. I can help you learn about:\n\n🤖 AI Experience & Projects\n💼 Work History & Impact\n🛠️ Technical Skills\n🏥 Healthcare AI Expertise\n🎓 Education\n📧 Contact Info\n\nTry the quick prompts below or ask me anything!";
         }
         
         // Thanks
         if (msg.includes('thank') || msg.includes('thanks') || msg.includes('appreciate')) {
-            return "🙏 You're welcome! Feel free to reach out to Chirag directly at chiragkhachane.ck71@gmail.com if you'd like to discuss opportunities or collaboration!";
+            return "🙏 **You're very welcome!**\n\nFeel free to reach out to Chirag directly:\n📧 chiragkhachane.ck71@gmail.com\n\nHe'd love to discuss opportunities or answer any questions!";
         }
         
         // Default response
-        return `I can help you learn about Chirag's:\n
-• 💼 Experience & Background\n
-• 🛠️ Skills & Tech Stack\n
-• 🚀 Projects & Portfolio\n
-• 🤖 AI/ML Expertise\n
-• 📊 Product Management\n
-• 📧 Contact Information\n
-• 🎯 Availability for Hire\n\nWhat would you like to know more about?`;
-    }
-    
-    // Call Gemini API (for users who add their own key)
-    async function callGeminiAPI(userMessage, thinkingDiv) {
-        try {
-            // Context about Chirag
-            const context = `You are an AI assistant for Chirag Khachane's portfolio. 
-            
-            About Chirag:
-            - AI Product Leader with 5+ years of experience
-            - Current: AI Product Manager at MyTreks.ai
-            - Previous: Senior Business Analyst at Third Estate Ventures, Business Analyst at Accenture, Primary Care IPA
-            - Product Strategy & Operations Consultant at Compass Crew
-            - Data Scientist at Atreya Innovations
-            - Design Thinking Analyst at Thinkschool
-            - Education: SUNY Buffalo
-            - Location: Buffalo, NY
-            - Email: chiragkhachane.ck71@gmail.com
-            - Phone: +1 (716) 617-1669
-            
-            Skills:
-            - AI/ML: Python, TensorFlow, PyTorch, Scikit-learn, NLP, Computer Vision
-            - Analytics: Tableau, Power BI, Pandas, NumPy, Plotly
-            - Cloud: AWS, Docker, Git
-            - Languages: Python, JavaScript, SQL, R, Java
-            - Product: Product Strategy, Market Research, User Research, Design Thinking
-            
-            Key Projects:
-            1. DataViz AI - AI-powered data visualization platform
-            2. Teaching Assistant AI - NLP-powered educational assistant
-            3. Insight Bridge - Personal data analysis AI assistant with GPT-4
-            4. Real Estate Analytics - Predictive pricing and market analysis
-            5. Healthcare Analytics - Patient outcome prediction
-            6. TRAVELLERA - AI travel assistant with NLP
-            7. Play Store Price Predictor - ML model for app pricing
-            8. Diabetes Prediction - Deep learning MLP model
-            9. NeuroQuest - Brain imaging data analysis
-            
-            Answer questions about Chirag's experience, skills, projects, and how to contact him. Be helpful, professional, and concise.`;
-            
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiApiKey}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: `${context}\n\nUser question: ${userMessage}\n\nProvide a helpful, concise response:`
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 500
-                    }
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error('API request failed');
-            }
-            
-            const data = await response.json();
-            const botResponse = data.candidates[0].content.parts[0].text;
-            
-            // Remove thinking message
-            chatMessages.removeChild(thinkingDiv);
-            addBotMessage(botResponse);
-            
-        } catch (error) {
-            console.error('Gemini API Error:', error);
-            chatMessages.removeChild(thinkingDiv);
-            const fallbackResponse = getIntelligentResponse(userMessage);
-            addBotMessage(fallbackResponse);
-        }
+        return "💡 **I can help you learn about:**\n\n🤖 AI Experience & Expertise\n� Work History & Achievements\n🚀 Projects & Portfolio\n🛠️ Technical Skills\n🏥 Healthcare AI\n🎓 Education\n📧 Contact Information\n🎯 Availability\n\n**Try the quick prompts below or ask your question!**";
     }
 }
 
@@ -806,13 +863,21 @@ document.head.appendChild(style);
 
 // ==================== FIGMA PROTOTYPE ZOOM CONTROLS ====================
 function initPrototypeZoom() {
+    console.log('🔍 Initializing Figma zoom controls...');
+    
     const figmaPrototype = document.getElementById('figmaPrototype');
     const zoomInBtn = document.getElementById('zoomIn');
     const zoomOutBtn = document.getElementById('zoomOut');
     const resetZoomBtn = document.getElementById('resetZoom');
     const zoomLevelDisplay = document.getElementById('zoomLevel');
     
-    if (!figmaPrototype || !zoomInBtn || !zoomOutBtn || !resetZoomBtn) return;
+    console.log('Figma prototype:', figmaPrototype);
+    console.log('Zoom buttons:', { zoomInBtn, zoomOutBtn, resetZoomBtn, zoomLevelDisplay });
+    
+    if (!figmaPrototype || !zoomInBtn || !zoomOutBtn || !resetZoomBtn || !zoomLevelDisplay) {
+        console.error('❌ Zoom controls not found!');
+        return;
+    }
     
     let currentZoom = 100;
     const zoomStep = 25;
@@ -823,7 +888,10 @@ function initPrototypeZoom() {
         currentZoom = Math.max(minZoom, Math.min(maxZoom, newZoom));
         figmaPrototype.style.transform = `scale(${currentZoom / 100})`;
         figmaPrototype.style.transformOrigin = 'top center';
-        zoomLevelDisplay.textContent = `${currentZoom}%`;
+        
+        if (zoomLevelDisplay) {
+            zoomLevelDisplay.textContent = `${currentZoom}%`;
+        }
         
         // Disable buttons at limits
         zoomOutBtn.disabled = currentZoom <= minZoom;
@@ -832,25 +900,123 @@ function initPrototypeZoom() {
         // Visual feedback for disabled state
         zoomOutBtn.style.opacity = currentZoom <= minZoom ? '0.5' : '1';
         zoomInBtn.style.opacity = currentZoom >= maxZoom ? '0.5' : '1';
+        
+        console.log(`Zoom updated to ${currentZoom}%`);
     }
     
-    zoomInBtn.addEventListener('click', () => updateZoom(currentZoom + zoomStep));
-    zoomOutBtn.addEventListener('click', () => updateZoom(currentZoom - zoomStep));
-    resetZoomBtn.addEventListener('click', () => updateZoom(100));
+    zoomInBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateZoom(currentZoom + zoomStep);
+    });
+    
+    zoomOutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateZoom(currentZoom - zoomStep);
+    });
+    
+    resetZoomBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateZoom(100);
+    });
     
     // Initialize
     updateZoom(100);
+    console.log('✅ Zoom controls initialized successfully!');
 }
 
-// Initialize prototype zoom on load
-window.addEventListener('load', () => {
-    initPrototypeZoom();
-});
+// ==================== LAZY LOAD FIGMA PROTOTYPE ====================
+function initLazyFigmaLoad() {
+    console.log('🎨 Initializing lazy Figma loading...');
+    
+    const loadBtn = document.getElementById('loadFigmaBtn');
+    const figmaPlaceholder = document.getElementById('figmaPlaceholder');
+    const figmaIframe = document.getElementById('figmaPrototype');
+    
+    if (!loadBtn || !figmaPlaceholder || !figmaIframe) {
+        console.warn('Figma lazy load elements not found');
+        return;
+    }
+    
+    loadBtn.addEventListener('click', function() {
+        console.log('Loading Figma prototype...');
+        
+        // Show loading state
+        loadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        loadBtn.disabled = true;
+        
+        // Load the iframe
+        const dataSrc = figmaIframe.getAttribute('data-src');
+        if (dataSrc) {
+            figmaIframe.src = dataSrc;
+            figmaIframe.style.display = 'block';
+            
+            // Hide placeholder after iframe loads
+            figmaIframe.onload = function() {
+                figmaPlaceholder.style.display = 'none';
+                console.log('✓ Figma prototype loaded successfully');
+            };
+            
+            // Timeout fallback - hide placeholder even if iframe doesn't fully load
+            setTimeout(() => {
+                figmaPlaceholder.style.display = 'none';
+            }, 3000);
+        }
+    });
+    
+    console.log('✓ Lazy Figma load ready');
+}
 
 // Console message
 console.log('%c👋 Hey there!', 'color: #6366f1; font-size: 24px; font-weight: bold;');
 console.log('%cLooking at the code? I like your style! 🚀', 'color: #ec4899; font-size: 16px;');
 console.log('%cFeel free to reach out: chiragkhachane.ck71@gmail.com', 'color: #8b5cf6; font-size: 14px;');
+
+// ==================== CONTACT FORM HANDLING ====================
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Show loading state
+        submitButton.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+        submitButton.disabled = true;
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.</div>';
+                formStatus.style.display = 'block';
+                contactForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            formStatus.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Oops! Something went wrong. Please try again or email me directly.</div>';
+            formStatus.style.display = 'block';
+        } finally {
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+            
+            // Hide status message after 5 seconds
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
+        }
+    });
+}
 
 // ==================== FINAL TOUCHES ====================
 
@@ -865,3 +1031,4 @@ function logPageView() {
 }
 
 logPageView();
+
