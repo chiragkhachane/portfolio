@@ -9,7 +9,6 @@
     
     <!-- Security Headers -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://assets.calendly.com https://embed.figma.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; frame-src https://embed.figma.com https://calendly.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
@@ -37,18 +36,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Resource hints for external services -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.calendly.com">
+    <link rel="dns-prefetch" href="https://logo.clearbit.com">
+    <link rel="dns-prefetch" href="https://www.gohighlevel.com">
+    <link rel="preconnect" href="https://logo.clearbit.com">
+    
     <!-- Icons - Load async to prevent blocking -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
-    <!-- Calendly link widget begin -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <!-- Calendly link widget - defer non-critical CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"></noscript>
     
     <!-- Styles - Critical CSS first -->
-    <link rel="stylesheet" href="styles.css?v=2074">
+    <link rel="stylesheet" href="styles.css?v=2075">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="script.js?v=2074" as="script">
+    <link rel="preload" href="script.js?v=2075" as="script">
     
     <!-- Calendly - Async loading -->
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
@@ -313,22 +320,22 @@
             <p class="companies-title" data-aos="fade-up">Trusted by Leading Organizations</p>
             <div class="companies-logos" data-aos="fade-up" data-aos-delay="100">
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/highlandprimarycare.net" alt="Highland Primary Care" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=Highland+PC'">
+                    <img src="https://logo.clearbit.com/highlandprimarycare.net" alt="Highland Primary Care" onerror="this.style.display='none'">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/gohighlevel.com" alt="HighLevel" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=HighLevel'">
+                    <img src="https://www.gohighlevel.com/hs-fs/hubfs/GoHighLevel%20Brand%20Guidelines/GoHighLevel%20Brand%20Logos/GoHighLevel-Primary-Logo-White.png?width=400" alt="HighLevel" style="background: #1a1a1a; padding: 10px;" onerror="this.style.display='none'">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/primarycareipa.org" alt="Primary Care IPA" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=PC+IPA'">
+                    <img src="https://logo.clearbit.com/primarycareipa.org" alt="Primary Care IPA" onerror="this.style.display='none'">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/thethinkschool.com" alt="Think School" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=Think+School'">
+                    <img src="https://logo.clearbit.com/thethinkschool.com" alt="Think School" onerror="this.style.display='none'">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=Accenture'">
+                    <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" onerror="this.style.display='none'">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/mytreks.ai" alt="MyTreks.ai" onerror="this.src='https://via.placeholder.com/120x60/f5f5f5/000000?text=MyTreks.ai'">
+                    <img src="https://logo.clearbit.com/mytreks.ai" alt="MyTreks.ai" onerror="this.style.display='none'">
                 </div>
             </div>
         </div>
@@ -1223,6 +1230,6 @@
     </div>
     
     <!-- Scripts - Deferred loading for better performance -->
-    <script defer src="script.js?v=2074"></script>
+    <script defer src="script.js?v=2075"></script>
 </body>
 </html>
