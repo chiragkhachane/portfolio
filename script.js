@@ -1,13 +1,43 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2067 loaded successfully');
+console.log('Script.js v2071 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
 
-// More robust initialization
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePortfolio);
-} else {
+// Hide loader and show content
+function hideLoader() {
+    const loader = document.getElementById('pageLoader');
+    if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }
+    console.log('✓ Page loader hidden');
+}
+
+// IMMEDIATE: Show chatbot button and hide loader
+document.addEventListener('DOMContentLoaded', () => {
+    // Hide loader first
+    hideLoader();
+    
+    // Make chatbot button visible
+    const assistantToggle = document.getElementById('assistantToggle');
+    if (assistantToggle) {
+        assistantToggle.style.display = 'flex';
+        assistantToggle.style.visibility = 'visible';
+        assistantToggle.style.opacity = '1';
+        assistantToggle.style.pointerEvents = 'all';
+        console.log('✅ Chat button forced visible');
+    }
+    
+    // Initialize portfolio
+    initializePortfolio();
+});
+
+// Fallback initialization if DOMContentLoaded already fired
+if (document.readyState !== 'loading') {
+    hideLoader();
     initializePortfolio();
 }
 
@@ -96,56 +126,6 @@ function initializePortfolio() {
         }
         
         console.log('✓ Portfolio initialization complete');
-    });
-}
-        } catch (error) {
-            console.error('AI Assistant failed:', error);
-        }
-        
-        try {
-            initContactForm();
-            console.log('✓ Contact form initialized');
-        } catch (error) {
-            console.error('Contact form failed:', error);
-        }
-        
-        try {
-            initAOS();
-            console.log('✓ AOS initialized');
-        } catch (error) {
-            console.error('AOS failed:', error);
-        }
-        
-        try {
-            initProjectMeter();
-            console.log('✓ Project meter initialized');
-        } catch (error) {
-            console.error('Project meter failed:', error);
-        }
-        
-        try {
-            initPrototypeZoom();
-            console.log('✓ Prototype zoom initialized');
-        } catch (error) {
-            console.error('Prototype zoom failed:', error);
-        }
-        
-        // Initialize Three.js only if available
-        if (typeof THREE !== 'undefined') {
-            isThreeJSLoaded = true;
-            setTimeout(() => {
-                try {
-                    initThreeJS();
-                    console.log('✓ Three.js initialized');
-                } catch (error) {
-                    console.error('Three.js failed:', error);
-                }
-            }, 100);
-        } else {
-            console.log('⚠ Three.js not loaded, skipping 3D background');
-        }
-        
-        console.log('Portfolio initialization complete');
     });
 }
 
@@ -267,6 +247,10 @@ function init3DBackground() {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
+    
+    } catch (error) {
+        console.error('3D background initialization failed:', error);
+    }
 }
 
 // ==================== FLOATING PARTICLES ====================
@@ -502,11 +486,21 @@ function initAIAssistant() {
         e.preventDefault();
         e.stopPropagation();
         console.log('🖱️ Toggle clicked!');
+        console.log('Before toggle - classList:', assistantChat.classList.toString());
+        console.log('Before toggle - display:', window.getComputedStyle(assistantChat).display);
         
         const isActive = assistantChat.classList.contains('active');
         assistantChat.classList.toggle('active');
         
-        console.log('Chat is now:', assistantChat.classList.contains('active') ? 'OPEN' : 'CLOSED');
+        console.log('After toggle - classList:', assistantChat.classList.toString());
+        console.log('After toggle - should be:', assistantChat.classList.contains('active') ? 'OPEN (display: flex)' : 'CLOSED (display: none)');
+        console.log('After toggle - actual display:', window.getComputedStyle(assistantChat).display);
+        
+        // Force display to ensure it shows
+        if (assistantChat.classList.contains('active')) {
+            assistantChat.style.display = 'flex';
+            console.log('✅ Forced display: flex');
+        }
         
         // Add welcome message on first open
         if (!isActive && chatMessages.children.length === 0) {
