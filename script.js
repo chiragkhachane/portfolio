@@ -1,5 +1,5 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2076 loaded successfully');
+console.log('Script.js v2077 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
@@ -484,40 +484,49 @@ function initAIAssistant() {
     
     console.log('✅ Setting up event listeners...');
     
-    // Toggle chat window - IMPROVED
-    assistantToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('🖱️ Toggle clicked!');
+    // Toggle chat window - BULLETPROOF VERSION
+    function toggleChat() {
+        console.log('🖱️ Toggle function called!');
         console.log('Before toggle - classList:', assistantChat.classList.toString());
-        console.log('Before toggle - display:', window.getComputedStyle(assistantChat).display);
         
         const isActive = assistantChat.classList.contains('active');
-        assistantChat.classList.toggle('active');
         
-        console.log('After toggle - classList:', assistantChat.classList.toString());
-        console.log('After toggle - should be:', assistantChat.classList.contains('active') ? 'OPEN (display: flex)' : 'CLOSED (display: none)');
-        console.log('After toggle - actual display:', window.getComputedStyle(assistantChat).display);
-        
-        // Force display to ensure it shows
-        if (assistantChat.classList.contains('active')) {
+        if (isActive) {
+            assistantChat.classList.remove('active');
+            assistantChat.style.display = 'none';
+            console.log('❌ Closed chat');
+        } else {
+            assistantChat.classList.add('active');
             assistantChat.style.display = 'flex';
-            console.log('✅ Forced display: flex');
+            assistantChat.style.opacity = '1';
+            assistantChat.style.visibility = 'visible';
+            console.log('✅ Opened chat');
+            
+            // Add welcome message on first open
+            if (chatMessages.children.length === 0) {
+                addBotMessage("👋 Hey there! I'm Chirag's AI assistant. I can tell you about his experience, projects, skills, and availability. What would you like to know?");
+            }
         }
-        
-        // Add welcome message on first open
-        if (!isActive && chatMessages.children.length === 0) {
-            addBotMessage("👋 Hey there! I'm Chirag's AI assistant. I can tell you about his experience, projects, skills, and availability. What would you like to know?");
-        }
-    });
+    }
+    
+    // Multiple event binding approaches to ensure it works
+    assistantToggle.onclick = toggleChat;
+    assistantToggle.addEventListener('click', toggleChat);
+    assistantToggle.addEventListener('touchstart', toggleChat);
+    
+    console.log('✅ Event listeners attached');
+    console.log('✅ Event listeners attached');
     
     // Close chat
     if (closeChat) {
+        closeChat.onclick = () => {
+            assistantChat.classList.remove('active');
+            assistantChat.style.display = 'none';
+            console.log('❌ Chat closed via X button');
+        };
         closeChat.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Closing chat...');
-            assistantChat.classList.remove('active');
         });
     }
     

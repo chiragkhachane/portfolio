@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Chat</title>
+    <style>
+        body { margin: 0; padding: 20px; }
+        .test-button { 
+            padding: 20px; 
+            background: blue; 
+            color: white; 
+            cursor: pointer;
+            display: inline-block;
+        }
+        .test-chat {
+            width: 300px;
+            height: 400px;
+            background: white;
+            border: 2px solid black;
+            display: none;
+        }
+        .test-chat.active {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-button" id="testToggle">Click Me</div>
+    <div class="test-chat" id="testChat">Chat Window</div>
+    
+    <script>
+        const btn = document.getElementById('testToggle');
+        const chat = document.getElementById('testChat');
+        
+        btn.addEventListener('click', () => {
+            console.log('Clicked!');
+            chat.classList.toggle('active');
+            console.log('Active:', chat.classList.contains('active'));
+        });
+    </script>
+</body>
+</html>
