@@ -1,5 +1,5 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2072 loaded successfully');
+console.log('Script.js v2073 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
