@@ -1688,19 +1688,23 @@ body {
     text-align: left;
 }
 
-.tab-content h4 {
+.tab-content h4,
+.tab-content .tab-title {
     font-size: 1.2rem;
     color: var(--text-light);
     margin-bottom: 0.5rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    display: block;
 }
 
-.category-tab:hover .tab-content h4 {
+.category-tab:hover .tab-content h4,
+.category-tab:hover .tab-content .tab-title {
     color: var(--primary-color);
 }
 
-.category-tab.active .tab-content h4 {
+.category-tab.active .tab-content h4,
+.category-tab.active .tab-content .tab-title {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
