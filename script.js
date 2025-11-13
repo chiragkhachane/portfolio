@@ -1,8 +1,9 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2077 loaded successfully');
+console.log('Script.js v2078 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
+let portfolioInitialized = false; // Prevent double initialization
 
 // Disable 3D background for better performance
 const ENABLE_3D_BACKGROUND = false;
@@ -45,6 +46,13 @@ if (document.readyState !== 'loading') {
 }
 
 function initializePortfolio() {
+    // Prevent double initialization
+    if (portfolioInitialized) {
+        console.log('⚠️ Portfolio already initialized, skipping...');
+        return;
+    }
+    portfolioInitialized = true;
+    
     console.log('Initializing portfolio...');
     
     // Critical path - load immediately with error handling
@@ -509,12 +517,9 @@ function initAIAssistant() {
         }
     }
     
-    // Multiple event binding approaches to ensure it works
-    assistantToggle.onclick = toggleChat;
-    assistantToggle.addEventListener('click', toggleChat);
-    assistantToggle.addEventListener('touchstart', toggleChat);
+    // Single event binding to prevent duplicates
+    assistantToggle.addEventListener('click', toggleChat, { once: false });
     
-    console.log('✅ Event listeners attached');
     console.log('✅ Event listeners attached');
     
     // Close chat
@@ -597,6 +602,17 @@ function initAIAssistant() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
+    // Simple markdown to HTML converter for chat
+    function markdownToHtml(text) {
+        return text
+            // Bold: **text** -> <strong>text</strong>
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            // Bullet points: • -> proper bullet
+            .replace(/^•\s/gm, '&bull; ')
+            // Line breaks
+            .replace(/\n/g, '<br>');
+    }
+    
     // Add bot message to chat
     function addBotMessage(message) {
         const messageDiv = document.createElement('div');
@@ -606,7 +622,7 @@ function initAIAssistant() {
                 <i class="fas fa-robot"></i>
             </div>
             <div class="message-content">
-                <p>${message.replace(/\n/g, '<br>')}</p>
+                <p>${markdownToHtml(message)}</p>
             </div>
         `;
         chatMessages.appendChild(messageDiv);
