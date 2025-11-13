@@ -842,8 +842,33 @@ body {
 }
 
 .skill-category i {
-    color: #ffffff;
     font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Colorful icons for each skill category */
+.skill-category h4 .fa-robot {
+    color: #10b981; /* Green for AI/ML */
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.skill-category h4 .fa-code {
+    color: #3b82f6; /* Blue for Languages */
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.skill-category h4 .fa-chart-bar {
+    color: #f59e0b; /* Orange for Analytics */
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.skill-category h4 .fa-cloud {
+    color: #8b5cf6; /* Purple for Cloud & Tools */
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.skill-category:hover h4 i {
+    transform: scale(1.2) rotate(10deg);
 }
 
 .skill-tags {
