@@ -45,37 +45,10 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     
     <!-- Styles - Critical CSS first -->
-    <link rel="stylesheet" href="styles.css?v=2073">
+    <link rel="stylesheet" href="styles.css?v=2074">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="script.js?v=2072" as="script">
-    
-    <!-- Lazy load heavy libraries after page interaction to reduce TBT -->
-    <script>
-        // Load Three.js and GSAP only after page is fully loaded and interactive
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                if (!window.THREE) {
-                    var threeScript = document.createElement('script');
-                    threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-                    threeScript.async = true;
-                    document.head.appendChild(threeScript);
-                }
-                
-                if (!window.gsap) {
-                    var gsapScript = document.createElement('script');
-                    gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
-                    gsapScript.async = true;
-                    document.head.appendChild(gsapScript);
-                    
-                    var scrollTrigger = document.createElement('script');
-                    scrollTrigger.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
-                    scrollTrigger.async = true;
-                    document.head.appendChild(scrollTrigger);
-                }
-            }, 2000); // Delay 2 seconds to improve TBT
-        });
-    </script>
+    <link rel="preload" href="script.js?v=2074" as="script">
     
     <!-- Calendly - Async loading -->
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
@@ -89,8 +62,8 @@
         </div>
     </div>
     
-    <!-- 3D Background Canvas -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- 3D Background Canvas - Disabled for better performance -->
+    <!-- <canvas id="bg-canvas"></canvas> -->
     
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
@@ -1250,6 +1223,6 @@
     </div>
     
     <!-- Scripts - Deferred loading for better performance -->
-    <script defer src="script.js?v=2073"></script>
+    <script defer src="script.js?v=2074"></script>
 </body>
 </html>

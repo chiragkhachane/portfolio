@@ -1,8 +1,11 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2073 loaded successfully');
+console.log('Script.js v2074 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
+
+// Disable 3D background for better performance
+const ENABLE_3D_BACKGROUND = false;
 
 // Hide loader and show content
 function hideLoader() {
@@ -112,8 +115,8 @@ function initializePortfolio() {
             console.error('Lazy Figma load failed:', error);
         }
         
-        // Only initialize 3D if Three.js loaded AND user hasn't scrolled
-        if (typeof THREE !== 'undefined') {
+        // 3D Background disabled for better performance
+        if (ENABLE_3D_BACKGROUND && typeof THREE !== 'undefined') {
             try {
                 init3DBackground();
                 console.log('✓ 3D background initialized');
@@ -122,7 +125,7 @@ function initializePortfolio() {
                 console.log('Continuing without 3D background...');
             }
         } else {
-            console.log('⚠ Three.js not loaded - skipping 3D background (site will work fine without it)');
+            console.log('⚠ 3D background disabled for optimal performance');
         }
         
         console.log('✓ Portfolio initialization complete');
@@ -256,7 +259,7 @@ function init3DBackground() {
 // ==================== FLOATING PARTICLES ====================
 function initParticles() {
     const particlesContainer = document.getElementById('particles');
-    const particleCount = 30; // Reduced from 50 to 30 for performance
+    const particleCount = 15; // Reduced for better performance
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
