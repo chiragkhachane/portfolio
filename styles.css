@@ -787,6 +787,7 @@ body {
     margin-bottom: 1rem;
 }
 
+.expertise-item h3,
 .expertise-item h4 {
     font-size: 1.3rem;
     margin-bottom: 0.75rem;
@@ -892,7 +893,7 @@ body {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #666;
+    color: #555;
     margin-bottom: 2rem;
     font-weight: 600;
 }
@@ -1006,7 +1007,7 @@ body {
 
 .author-info p {
     font-size: 0.85rem;
-    color: #666;
+    color: #555;
     margin: 0;
 }
 
