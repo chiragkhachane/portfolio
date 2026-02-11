@@ -1,5 +1,4 @@
 // ==================== INITIALIZATION ====================
-console.log('Script.js v2080 loaded successfully');
 
 let isThreeJSLoaded = false;
 let pageFullyLoaded = false;
@@ -17,7 +16,6 @@ function hideLoader() {
             loader.style.display = 'none';
         }, 500);
     }
-    console.log('✓ Page loader hidden');
 }
 
 // IMMEDIATE: Show chatbot button and hide loader
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         assistantToggle.style.visibility = 'visible';
         assistantToggle.style.opacity = '1';
         assistantToggle.style.pointerEvents = 'all';
-        console.log('✅ Chat button forced visible');
     }
     
     // Initialize portfolio
@@ -48,77 +45,78 @@ if (document.readyState !== 'loading') {
 function initializePortfolio() {
     // Prevent double initialization
     if (portfolioInitialized) {
-        console.log('⚠️ Portfolio already initialized, skipping...');
         return;
     }
     portfolioInitialized = true;
     
-    console.log('Initializing portfolio...');
     
     // Critical path - load immediately with error handling
     try {
         initTypingEffect();
-        console.log('✓ Typing effect initialized');
     } catch (error) {
         console.error('Typing effect failed:', error);
     }
     
     try {
         initNavigation();
-        console.log('✓ Navigation initialized');
     } catch (error) {
         console.error('Navigation failed:', error);
+    }
+    
+    try {
+        initProjectMeter();
+    } catch (error) {
+        console.error('Project category selector failed:', error);
     }
     
     // Mark page as loaded after a reasonable timeout to prevent infinite loading
     setTimeout(() => {
         pageFullyLoaded = true;
-        console.log('✓ Page load timeout completed - forcing ready state');
     }, 3000); // 3 seconds max wait
     
     // Defer heavy features until page is fully loaded
     window.addEventListener('load', () => {
         pageFullyLoaded = true;
-        console.log('Page fully loaded, initializing heavy features...');
         
         try {
             initParticles();
-            console.log('✓ Particles initialized');
         } catch (error) {
             console.error('Particles failed:', error);
         }
         
         try {
             initScrollAnimations();
-            console.log('✓ Scroll animations initialized');
         } catch (error) {
             console.error('Scroll animations failed:', error);
         }
         
+        // Fallback AOS for data-aos elements
+        try {
+            initAOS();
+        } catch (error) {
+            console.error('AOS fallback failed:', error);
+        }
+        
         try {
             initAIAssistant();
-            console.log('✓ AI Assistant initialized');
         } catch (error) {
             console.error('AI Assistant failed:', error);
         }
         
         try {
             initContactForm();
-            console.log('✓ Contact form initialized');
         } catch (error) {
             console.error('Contact form failed:', error);
         }
         
         try {
             initPrototypeZoom();
-            console.log('✓ Prototype zoom initialized');
         } catch (error) {
             console.error('Prototype zoom failed:', error);
         }
         
         try {
             initLazyFigmaLoad();
-            console.log('✓ Lazy Figma load initialized');
         } catch (error) {
             console.error('Lazy Figma load failed:', error);
         }
@@ -127,16 +125,12 @@ function initializePortfolio() {
         if (ENABLE_3D_BACKGROUND && typeof THREE !== 'undefined') {
             try {
                 init3DBackground();
-                console.log('✓ 3D background initialized');
             } catch (error) {
                 console.error('3D background failed:', error);
-                console.log('Continuing without 3D background...');
             }
         } else {
-            console.log('⚠ 3D background disabled for optimal performance');
         }
         
-        console.log('✓ Portfolio initialization complete');
     });
 }
 
@@ -144,7 +138,6 @@ function initializePortfolio() {
 function init3DBackground() {
     // Check if Three.js is available
     if (typeof THREE === 'undefined') {
-        console.log('⚠ Three.js not available, skipping 3D background');
         return;
     }
     
@@ -332,6 +325,15 @@ function initNavigation() {
         hamburger.classList.toggle('active');
     });
     
+    // Keyboard support for hamburger menu
+    hamburger?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+    });
+    
     // Close menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -370,11 +372,11 @@ function initScrollAnimations() {
     gsap.utils.toArray('section').forEach(section => {
         gsap.from(section, {
             opacity: 0,
-            y: 50,
-            duration: 1,
+            y: 30,
+            duration: 0.8,
             scrollTrigger: {
                 trigger: section,
-                start: 'top 80%',
+                start: 'top 95%', // Start earlier
                 end: 'top 20%',
                 toggleActions: 'play none none reverse'
             }
@@ -385,13 +387,13 @@ function initScrollAnimations() {
     gsap.utils.toArray('.project-card').forEach((card, index) => {
         gsap.from(card, {
             opacity: 0,
-            y: 50,
-            rotation: 5,
-            duration: 0.8,
-            delay: index * 0.1,
+            y: 30,
+            rotation: 0,
+            duration: 0.6,
+            delay: index * 0.05, // Reduced delay
             scrollTrigger: {
                 trigger: card,
-                start: 'top 85%',
+                start: 'top 95%', // Start earlier
                 toggleActions: 'play none none reverse'
             }
         });
@@ -401,12 +403,12 @@ function initScrollAnimations() {
     gsap.utils.toArray('.timeline-item').forEach((item, index) => {
         gsap.from(item, {
             opacity: 0,
-            x: -50,
-            duration: 0.8,
-            delay: index * 0.15,
+            x: -30,
+            duration: 0.6,
+            delay: index * 0.08, // Reduced delay
             scrollTrigger: {
                 trigger: item,
-                start: 'top 85%',
+                start: 'top 95%', // Start earlier
                 toggleActions: 'play none none reverse'
             }
         });
@@ -430,23 +432,27 @@ function initScrollAnimations() {
 // ==================== AOS (Animate on Scroll) ====================
 function initAOS() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 100px 0px' // Trigger animations earlier (100px before element enters viewport)
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                // Apply delay if specified in data-aos-delay
+                const delay = entry.target.getAttribute('data-aos-delay') || 0;
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, parseInt(delay));
             }
         });
     }, observerOptions);
     
     document.querySelectorAll('[data-aos]').forEach(element => {
         element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(element);
     });
 }
@@ -465,10 +471,53 @@ function updateProgressBar() {
 window.addEventListener('scroll', updateProgressBar);
 window.addEventListener('resize', updateProgressBar);
 
-// ==================== AI ASSISTANT (SMART CHATBOT) ====================
-function initAIAssistant() {
-    console.log('🤖 Initializing AI Assistant...');
+// ==================== ANIMATED COUNTERS ====================
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
     
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const start = 0;
+                const startTime = performance.now();
+                
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Easing function for smooth animation
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(start + (target - start) * easeOut);
+                    counter.textContent = current;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                }
+                
+                requestAnimationFrame(updateCounter);
+                observer.unobserve(counter);
+            }
+        });
+    }, observerOptions);
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// Initialize counters when DOM is ready
+document.addEventListener('DOMContentLoaded', initCounters);
+
+// ==================== AI ASSISTANT V2 (MODERN CHATBOT) ====================
+function initAIAssistant() {
     const assistantToggle = document.getElementById('assistantToggle');
     const assistantChat = document.getElementById('assistantChat');
     const closeChat = document.getElementById('closeChat');
@@ -476,62 +525,27 @@ function initAIAssistant() {
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
     
-    // Debug logging
-    console.log('Toggle button:', assistantToggle);
-    console.log('Chat window:', assistantChat);
+    if (!assistantToggle || !assistantChat) return;
     
-    if (!assistantToggle) {
-        console.error('❌ Assistant toggle button not found!');
-        return;
-    }
-    
-    if (!assistantChat) {
-        console.error('❌ Assistant chat window not found!');
-        return;
-    }
-    
-    console.log('✅ Setting up event listeners...');
-    
-    // Toggle chat window - BULLETPROOF VERSION
+    // Toggle chat window
     function toggleChat() {
-        console.log('🖱️ Toggle function called!');
-        console.log('Before toggle - classList:', assistantChat.classList.toString());
-        
         const isActive = assistantChat.classList.contains('active');
-        
         if (isActive) {
             assistantChat.classList.remove('active');
-            assistantChat.style.display = 'none';
-            console.log('❌ Closed chat');
         } else {
             assistantChat.classList.add('active');
-            assistantChat.style.display = 'flex';
-            assistantChat.style.opacity = '1';
-            assistantChat.style.visibility = 'visible';
-            console.log('✅ Opened chat');
-            
-            // Add welcome message on first open
-            if (chatMessages.children.length === 0) {
-                addBotMessage("👋 Hey there! I'm Chirag's AI assistant. I can tell you about his experience, projects, skills, and availability. What would you like to know?");
-            }
+            chatInput?.focus();
         }
     }
     
-    // Single event binding to prevent duplicates
-    assistantToggle.addEventListener('click', toggleChat, { once: false });
-    
-    console.log('✅ Event listeners attached');
+    assistantToggle.addEventListener('click', toggleChat);
     
     // Close chat
     if (closeChat) {
-        closeChat.onclick = () => {
-            assistantChat.classList.remove('active');
-            assistantChat.style.display = 'none';
-            console.log('❌ Chat closed via X button');
-        };
         closeChat.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
+            assistantChat.classList.remove('active');
         });
     }
     
@@ -540,20 +554,24 @@ function initAIAssistant() {
         const message = chatInput.value.trim();
         if (!message) return;
         
+        // Hide welcome and quick actions
+        const welcome = chatMessages.querySelector('.ai-welcome');
+        const quickPrompts = document.getElementById('quickPrompts');
+        if (welcome) welcome.style.display = 'none';
+        if (quickPrompts) quickPrompts.style.display = 'none';
+        
         addUserMessage(message);
         chatInput.value = '';
         
-        // Hide prompts after first message
-        const quickPrompts = document.getElementById('quickPrompts');
-        if (quickPrompts) {
-            quickPrompts.style.display = 'none';
-        }
+        // Show typing indicator
+        const typingDiv = showTypingIndicator();
         
-        // Process message with intelligent responses
+        // Respond after short delay
         setTimeout(() => {
+            typingDiv.remove();
             const response = getIntelligentResponse(message);
             addBotMessage(response);
-        }, 600);
+        }, 800 + Math.random() * 400);
     }
     
     if (sendMessage) {
@@ -572,8 +590,8 @@ function initAIAssistant() {
         });
     }
     
-    // Handle quick prompt clicks
-    document.querySelectorAll('.prompt-btn').forEach(btn => {
+    // Handle quick action clicks
+    document.querySelectorAll('.ai-action-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const prompt = btn.getAttribute('data-prompt');
@@ -584,117 +602,133 @@ function initAIAssistant() {
         });
     });
     
-    console.log('✅ AI Assistant fully initialized!');
-    
-    // Add user message to chat
+    // Add user message
     function addUserMessage(message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'message user-message';
+        messageDiv.className = 'ai-message user';
         messageDiv.innerHTML = `
-            <div class="message-avatar">
-                <i class="fas fa-user"></i>
+            <div class="ai-message-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
             </div>
-            <div class="message-content">
-                <p>${message}</p>
+            <div class="ai-message-content">
+                <p>${escapeHtml(message)}</p>
             </div>
         `;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Simple markdown to HTML converter for chat
-    function markdownToHtml(text) {
+    // Show typing indicator
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'ai-message';
+        typingDiv.innerHTML = `
+            <div class="ai-message-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div class="ai-message-content">
+                <div class="ai-typing">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return typingDiv;
+    }
+    
+    // Add bot message
+    function addBotMessage(message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'ai-message';
+        messageDiv.innerHTML = `
+            <div class="ai-message-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div class="ai-message-content">
+                <p>${formatResponse(message)}</p>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Escape HTML
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Format response with basic markdown
+    function formatResponse(text) {
         return text
-            // Bold: **text** -> <strong>text</strong>
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            // Bullet points: • -> proper bullet
-            .replace(/^•\s/gm, '&bull; ')
-            // Line breaks
             .replace(/\n/g, '<br>');
     }
     
-    // Add bot message to chat
-    function addBotMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message bot-message';
-        messageDiv.innerHTML = `
-            <div class="message-avatar">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div class="message-content">
-                <p>${markdownToHtml(message)}</p>
-            </div>
-        `;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-    
-    // Intelligent response system
+    // Intelligent response system - conversational tone
     function getIntelligentResponse(message) {
         const msg = message.toLowerCase();
         
-        // AI Experience (matches quick prompt)
-        if (msg.includes('ai experience') || msg.includes("chirag's ai")) {
-            return "🤖 **AI Leadership Experience:**\n\n**Current Roles:**\n• AI & Business Solutions Architect at Highland Primary Care - Building HIPAA-compliant GenAI patient solutions\n• AI Product Manager at MyTreks.ai - Leading career guidance AI platform\n\n**Key Achievements:**\n✅ Deployed GenAI screening agents serving 55,000+ patients\n✅ Built LLM-powered analytics platforms\n✅ 100% HIPAA compliance track record\n✅ Expertise in GPT-4, Claude, Gemini, Vector DBs\n\nI transform AI concepts into production systems with measurable ROI!";
+        // Background & Experience
+        if (msg.includes('background') || msg.includes('experience') || msg.includes('career') || msg.includes('work')) {
+            return "Chirag has over 5 years of experience in AI product leadership and business analytics.\n\n**Current roles:**\n• AI & Business Solutions Architect at Highland Primary Care\n• AI Product Manager at MyTreks.ai\n\n**Previously:** Business Analyst at Accenture (Fortune 500), Lead BA at Third Estate Ventures, and roles at Persistent Systems.\n\nHe's delivered $5M+ in cost savings and impacted 55,000+ users across healthcare and enterprise AI projects.";
         }
         
-        // Projects (matches quick prompt)
-        if (msg.includes('projects has') || msg.includes('worked on')) {
-            return "� **Featured Projects:**\n\n1. **DataViz AI** - NLP-powered automated data visualization\n2. **Teaching Assistant AI** - Educational chatbot for personalized learning\n3. **Insight Bridge** - GPT-4 data analysis platform\n4. **Healthcare Analytics** - Patient outcome prediction (55K+ patients)\n5. **Real Estate Analytics** - Predictive pricing models\n\nAll projects focus on solving real business problems with measurable impact. Want to see demos or learn more about any specific project?";
+        // Projects
+        if (msg.includes('project') || msg.includes('built') || msg.includes('portfolio') || msg.includes('worked on')) {
+            return "Here are some of Chirag's notable projects:\n\n**DataViz AI** — NLP-powered tool that automatically generates data visualizations from natural language queries.\n\n**Teaching Assistant AI** — Educational chatbot providing personalized learning support.\n\n**Insight Bridge** — GPT-4 powered data analysis platform.\n\n**Healthcare Analytics** — Patient outcome prediction system serving 55K+ patients.\n\nEach project focused on solving real problems with measurable impact. Check the Projects section for demos and details.";
         }
         
-        // Skills (matches quick prompt)
-        if (msg.includes('key skills') || (msg.includes('skills') && msg.includes('chirag'))) {
-            return "🛠️ **Technical Skills:**\n\n**AI/ML:** Python, TensorFlow, PyTorch, LLMs (GPT-4, Claude, Gemini), Vector DBs, NLP, Computer Vision\n\n**Analytics:** Tableau, Power BI, SQL, Pandas, Advanced Statistics\n\n**Cloud & Tools:** AWS, Docker, Git, Agile, Jira\n\n**Product:** Strategy, User Research, Design Thinking, Rapid Prototyping\n\n**Special Strength:** Bridging technical execution with business strategy - I speak both languages fluently!";
+        // AI Skills
+        if (msg.includes('skill') || msg.includes('ai') || msg.includes('tech') || msg.includes('stack') || msg.includes('tools')) {
+            return "Chirag's core technical skills:\n\n**AI/ML:** Python, TensorFlow, PyTorch, LLMs (GPT-4, Claude, Gemini), Vector Databases, NLP\n\n**Analytics:** Tableau, Power BI, SQL, Pandas, Statistical Analysis\n\n**Cloud & DevOps:** AWS, Docker, Git\n\n**Product:** Strategy, User Research, Agile, Rapid Prototyping\n\nHis strength is bridging technical execution with business strategy — he speaks both languages fluently.";
         }
         
-        // Healthcare (matches quick prompt)
-        if (msg.includes('healthcare experience') || (msg.includes('healthcare') && msg.includes('chirag'))) {
-            return "🏥 **Healthcare AI Expertise:**\n\n**At Highland Primary Care:**\n✅ Architecting HIPAA-compliant patient-facing AI solutions\n✅ Deployed GenAI agents for patient screening & scheduling\n✅ Integrated EMR/CRM systems (100% compliance)\n✅ Improved 55,000+ patient outcomes\n\n**Impact:**\n• Streamlined care coordination\n• Reduced operational costs\n• Enhanced patient experience\n• Zero compliance violations\n\nI understand both the technical challenges and regulatory requirements in healthcare AI!";
+        // Availability & Hiring
+        if (msg.includes('hire') || msg.includes('available') || msg.includes('availab') || msg.includes('looking') || msg.includes('open')) {
+            return "Yes, Chirag is actively exploring new opportunities in AI product leadership.\n\nHe specializes in:\n• Building AI products from 0→1\n• Cross-functional team leadership\n• Rapid MVP development (weeks, not months)\n• HIPAA-compliant healthcare AI\n\n**Track record:** $5M+ in value delivered, 55K+ users impacted, 100% project delivery rate.\n\nInterested? Reach out at **chiragkhachane.ck71@gmail.com** or book a call through the Contact section.";
         }
         
-        // Education (matches quick prompt)
-        if (msg.includes('educational background') || (msg.includes('education') && msg.includes('chirag'))) {
-            return "🎓 **Education:**\n\n**MS in Industrial & Systems Engineering**\nUniversity at Buffalo (2021-2023)\n• GPA: 3.8/4.0\n• Focus: Data Analytics, Operations Research, AI Applications\n\n**BE in Mechanical Engineering**\nUniversity of Mumbai (2016-2020)\n• GPA: 3.7/4.0\n• Focus: Systems Design, Engineering Analysis\n\n**Certifications:**\n• Advanced AI & ML specializations\n• Product Management certifications\n\nI combine engineering fundamentals with cutting-edge AI expertise!";
+        // Healthcare
+        if (msg.includes('healthcare') || msg.includes('medical') || msg.includes('hipaa') || msg.includes('patient')) {
+            return "At Highland Primary Care, Chirag architects HIPAA-compliant patient-facing AI solutions.\n\n**Key work:**\n• Deployed GenAI screening agents for patient intake\n• Integrated EMR/CRM systems with 100% compliance\n• Improved outcomes for 55,000+ patients\n• Zero compliance violations\n\nHe understands both the technical challenges and regulatory requirements of healthcare AI.";
         }
         
-        // Contact (matches quick prompt)
-        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('phone') || msg.includes('connect')) {
-            return "📧 **Let's Connect!**\n\n✉️ Email: chiragkhachane.ck71@gmail.com\n📱 Phone: +1 (716) 617-1669\n💼 LinkedIn: linkedin.com/in/chiragkhachane\n💻 GitHub: github.com/chiragkhachane\n📅 Schedule a call: [Book time via Calendly]\n\n🎯 **Currently Available** for AI/Product leadership roles!\n\nI typically respond within 24 hours. Looking forward to connecting!";
+        // Education
+        if (msg.includes('education') || msg.includes('degree') || msg.includes('study') || msg.includes('university') || msg.includes('school')) {
+            return "**MS in Industrial & Systems Engineering**\nUniversity at Buffalo (2021-2023) — GPA: 3.8/4.0\nFocus: Data Analytics, Operations Research, AI Applications\n\n**BE in Mechanical Engineering**\nUniversity of Mumbai (2016-2020) — GPA: 3.7/4.0\n\nHe combines strong engineering fundamentals with cutting-edge AI expertise.";
         }
         
-        // Hiring & Availability
-        if (msg.includes('hire') || msg.includes('available') || msg.includes('work') || msg.includes('looking')) {
-            return "� **Yes! I'm actively seeking opportunities!**\n\nI specialize in:\n• AI Product Leadership\n• Building 0→1 AI products\n• Cross-functional team management\n• Rapid MVP development (weeks, not months)\n\n**Proven Track Record:**\n✅ $5M+ in cost savings delivered\n✅ 55K+ users impacted\n✅ Multiple AI products shipped to production\n\nLet's discuss how I can drive AI innovation for your organization!\n\n📧 chiragkhachane.ck71@gmail.com";
-        }
-        
-        // General Experience
-        if (msg.includes('experience') || msg.includes('background') || msg.includes('career')) {
-            return "💼 **5+ Years of AI/Product Leadership:**\n\n**Current (2024-Present):**\n• AI Architect at Highland Primary Care\n• AI Product Manager at MyTreks.ai\n\n**Previous:**\n• Lead Business Analyst at Third Estate Ventures\n• Business Analyst at Accenture (Fortune 500)\n• Product roles at Persistent Systems & Atreya\n\n**Impact Delivered:**\n💰 $5M+ cost savings\n👥 55,000+ users impacted\n🎯 100% project delivery rate\n\nI turn AI concepts into shipped products!";
-        }
-        
-        // General Skills
-        if (msg.includes('skill') || msg.includes('technical') || msg.includes('stack') || msg.includes('tools')) {
-            return "�️ **Tech Stack:**\n\n**AI/ML:** Python, TensorFlow, PyTorch, LLMs, GenAI, Vector DBs\n**Analytics:** Tableau, Power BI, SQL, Pandas\n**Cloud:** AWS, Docker, Git\n**Product:** Strategy, User Research, Agile, Design Thinking\n\n**Unique Strength:** I bridge technical execution with business strategy seamlessly - translating between engineers and executives!";
-        }
-        
-        // Product Management
-        if (msg.includes('product') || msg.includes('pm') || msg.includes('roadmap') || msg.includes('strategy')) {
-            return "📊 **AI Product Management:**\n\n**Expertise:**\n• Product strategy & roadmapping\n• User research & market validation\n• Cross-functional team leadership\n• Agile development & rapid iteration\n• Data-driven decision making\n\n**Philosophy:** Ship fast, iterate faster. I turn ideas into MVPs in weeks, not months!\n\n**Results:** 100% on-time delivery, $5M+ value created";
+        // Contact
+        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('phone') || msg.includes('connect') || msg.includes('talk')) {
+            return "You can reach Chirag at:\n\n**Email:** chiragkhachane.ck71@gmail.com\n**Phone:** +1 (716) 617-1669\n**LinkedIn:** linkedin.com/in/chiragkhachane\n**GitHub:** github.com/chiragkhachane\n\nOr use the contact form below to send a message directly. He typically responds within 24 hours.";
         }
         
         // Greetings
-        if (msg.includes('hello') || msg.includes('hi ') || msg.includes('hey') || msg === 'hi' || msg === 'hey') {
-            return "👋 **Hey there!**\n\nI'm Chirag's AI assistant. I can help you learn about:\n\n🤖 AI Experience & Projects\n💼 Work History & Impact\n🛠️ Technical Skills\n🏥 Healthcare AI Expertise\n🎓 Education\n📧 Contact Info\n\nTry the quick prompts below or ask me anything!";
+        if (msg === 'hi' || msg === 'hey' || msg === 'hello' || msg.includes('hi ') || msg.includes('hey ') || msg.includes('hello ')) {
+            return "Hey! I can help you learn about Chirag's background, projects, skills, and availability.\n\nFeel free to ask anything, or try one of these:\n• \"What's his experience?\"\n• \"What projects has he built?\"\n• \"Is he available for hire?\"";
         }
         
         // Thanks
         if (msg.includes('thank') || msg.includes('thanks') || msg.includes('appreciate')) {
-            return "🙏 **You're very welcome!**\n\nFeel free to reach out to Chirag directly:\n📧 chiragkhachane.ck71@gmail.com\n\nHe'd love to discuss opportunities or answer any questions!";
+            return "You're welcome! If you'd like to connect with Chirag directly, reach out at **chiragkhachane.ck71@gmail.com** — he'd be happy to chat.";
         }
         
-        // Default response
-        return "💡 **I can help you learn about:**\n\n🤖 AI Experience & Expertise\n� Work History & Achievements\n🚀 Projects & Portfolio\n🛠️ Technical Skills\n🏥 Healthcare AI\n🎓 Education\n📧 Contact Information\n🎯 Availability\n\n**Try the quick prompts below or ask your question!**";
+        // Default
+        return "I can tell you about Chirag's experience, projects, technical skills, or availability.\n\nTry asking:\n• \"What's his background?\"\n• \"What projects has he built?\"\n• \"What are his AI skills?\"\n• \"Is he available for hire?\"";
     }
 }
 
@@ -749,30 +783,10 @@ function initProjectMeter() {
 }
 
 // ==================== CONTACT FORM ====================
+// Contact form is handled by the Formspree handler at the bottom of the file
 function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
-        
-        // Create mailto link
-        const mailtoLink = `mailto:chiragkhachane.ck71@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`)}`;
-        
-        // Open mail client
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        alert('Thank you for your message! Your email client will open to send the message.');
-        contactForm.reset();
-    });
+    // This function is intentionally empty - the actual form handling
+    // uses Formspree and is implemented in the CONTACT FORM HANDLING section below
 }
 
 // ==================== UTILITY FUNCTIONS ====================
@@ -885,7 +899,6 @@ document.head.appendChild(style);
 
 // ==================== FIGMA PROTOTYPE ZOOM CONTROLS ====================
 function initPrototypeZoom() {
-    console.log('🔍 Initializing Figma zoom controls...');
     
     const figmaPrototype = document.getElementById('figmaPrototype');
     const zoomInBtn = document.getElementById('zoomIn');
@@ -893,8 +906,6 @@ function initPrototypeZoom() {
     const resetZoomBtn = document.getElementById('resetZoom');
     const zoomLevelDisplay = document.getElementById('zoomLevel');
     
-    console.log('Figma prototype:', figmaPrototype);
-    console.log('Zoom buttons:', { zoomInBtn, zoomOutBtn, resetZoomBtn, zoomLevelDisplay });
     
     if (!figmaPrototype || !zoomInBtn || !zoomOutBtn || !resetZoomBtn || !zoomLevelDisplay) {
         console.error('❌ Zoom controls not found!');
@@ -923,7 +934,6 @@ function initPrototypeZoom() {
         zoomOutBtn.style.opacity = currentZoom <= minZoom ? '0.5' : '1';
         zoomInBtn.style.opacity = currentZoom >= maxZoom ? '0.5' : '1';
         
-        console.log(`Zoom updated to ${currentZoom}%`);
     }
     
     zoomInBtn.addEventListener('click', (e) => {
@@ -943,12 +953,10 @@ function initPrototypeZoom() {
     
     // Initialize
     updateZoom(100);
-    console.log('✅ Zoom controls initialized successfully!');
 }
 
 // ==================== LAZY LOAD FIGMA PROTOTYPE ====================
 function initLazyFigmaLoad() {
-    console.log('🎨 Initializing lazy Figma loading...');
     
     const loadBtn = document.getElementById('loadFigmaBtn');
     const figmaPlaceholder = document.getElementById('figmaPlaceholder');
@@ -960,7 +968,6 @@ function initLazyFigmaLoad() {
     }
     
     loadBtn.addEventListener('click', function() {
-        console.log('Loading Figma prototype...');
         
         // Show loading state
         loadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
@@ -975,7 +982,6 @@ function initLazyFigmaLoad() {
             // Hide placeholder after iframe loads
             figmaIframe.onload = function() {
                 figmaPlaceholder.style.display = 'none';
-                console.log('✓ Figma prototype loaded successfully');
             };
             
             // Timeout fallback - hide placeholder even if iframe doesn't fully load
@@ -985,13 +991,9 @@ function initLazyFigmaLoad() {
         }
     });
     
-    console.log('✓ Lazy Figma load ready');
 }
 
 // Console message
-console.log('%c👋 Hey there!', 'color: #6366f1; font-size: 24px; font-weight: bold;');
-console.log('%cLooking at the code? I like your style! 🚀', 'color: #ec4899; font-size: 16px;');
-console.log('%cFeel free to reach out: chiragkhachane.ck71@gmail.com', 'color: #8b5cf6; font-size: 14px;');
 
 // ==================== CONTACT FORM HANDLING ====================
 const contactForm = document.getElementById('contactForm');
@@ -1040,6 +1042,91 @@ if (contactForm) {
     });
 }
 
+// ==================== EASTER EGG - KONAMI CODE ====================
+(function() {
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                activateEasterEgg();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+    
+    function activateEasterEgg() {
+        // Create confetti effect
+        const colors = ['#6366f1', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6'];
+        const confettiCount = 150;
+        
+        for (let i = 0; i < confettiCount; i++) {
+            createConfetti(colors[Math.floor(Math.random() * colors.length)]);
+        }
+        
+        // Show secret message
+        const message = document.createElement('div');
+        message.innerHTML = '🎮 You found the secret! Thanks for exploring! 🚀';
+        message.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 99999;
+            animation: popIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.5);
+        `;
+        document.body.appendChild(message);
+        
+        setTimeout(() => message.remove(), 4000);
+        
+    }
+    
+    function createConfetti(color) {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = `
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: ${color};
+            left: ${Math.random() * 100}vw;
+            top: -10px;
+            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+            z-index: 99998;
+            animation: confettiFall ${2 + Math.random() * 2}s linear forwards;
+            transform: rotate(${Math.random() * 360}deg);
+        `;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+    }
+    
+    // Add confetti keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        @keyframes popIn {
+            from { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+
 // ==================== FINAL TOUCHES ====================
 
 // Add loading screen fade out
@@ -1049,7 +1136,6 @@ window.addEventListener('load', () => {
 
 // Log page view analytics (placeholder for future implementation)
 function logPageView() {
-    console.log('Portfolio viewed at:', new Date().toISOString());
 }
 
 logPageView();
