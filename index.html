@@ -31,6 +31,10 @@
     
     <title>Chirag Khachane | AI Product Leader - Available for Hire</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Chirag_Profile_Pic_Oct22.png">
+    <link rel="apple-touch-icon" href="Chirag_Profile_Pic_Oct22.png">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,8 +63,15 @@
     
     <!-- Calendly - Async loading -->
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#home" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+    
     <!-- Page Loader -->
     <div id="pageLoader" class="page-loader">
         <div class="loader-content">
@@ -75,6 +86,9 @@
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
     
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -82,7 +96,7 @@
                 <span class="logo-icon">⚡</span>
                 <span class="logo-text">CHIRAG<span class="highlight">KHACHANE</span></span>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" role="navigation" aria-label="Main navigation">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -90,7 +104,7 @@
                 <li><a href="#design" class="nav-link">Design</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -103,9 +117,11 @@
         <div class="hero-container">
             <!-- Left Side - Status and Title -->
             <div class="hero-left">
-                <div class="project-status">
-                    <span class="status-dot"></span>
-                    Available for new opportunities
+                <div class="status-badges">
+                    <div class="project-status">
+                        <span class="status-dot"></span>
+                        Available for hire
+                    </div>
                 </div>
                 
                 <h1 class="hero-main-title">
@@ -127,12 +143,47 @@
                 </div>
                 
                 <div class="hero-cta-group">
-                    <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/chiragkhachane-ck71/30min'});return false;" class="btn-hire-me">
+                    <a href="#contact" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/chiragkhachane-ck71/30min'});return false;" class="btn-hire-me" aria-label="Schedule a meeting with Chirag">
                         Hire Me
                     </a>
-                    <a href="Chirag_Khachane_Resume.pdf" download class="btn-download-resume">
-                        <i class="fas fa-download"></i> Download Resume
+                    <a href="mailto:chiragkhachane.ck71@gmail.com?subject=Resume%20Request&body=Hi%20Chirag%2C%0A%0AI%20would%20like%20to%20request%20a%20copy%20of%20your%20resume.%0A%0AThank%20you!" class="btn-download-resume" aria-label="Request Chirag's resume">
+                        <i class="fas fa-file-alt"></i> Resume
                     </a>
+                    <a href="https://linkedin.com/in/chiragkhachane" target="_blank" rel="noopener noreferrer" class="btn-social-link" aria-label="View LinkedIn profile">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+    
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <span class="stat-number" data-count="5">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <span class="stat-number" data-count="12">0</span><span class="stat-suffix">M+</span>
+                    <span class="stat-label">Revenue Impact</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="stat-number" data-count="15">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">AI Products Built</span>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <span class="stat-number" data-count="500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">GitHub Commits</span>
                 </div>
             </div>
         </div>
@@ -208,16 +259,16 @@
                             <h4><i class="fas fa-robot"></i> AI/ML</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="AI Agents">
+                                    <i class="fas fa-robot" style="color: #10b981;"></i>
                                     AI Agents
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="LLMs">
+                                    <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="LLMs" loading="lazy">
                                     LLMs
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="Vector Embedding">
-                                    Vector Embedding
+                                    <i class="fas fa-database" style="color: #8b5cf6;"></i>
+                                    Vector DBs
                                 </span>
                             </div>
                         </div>
@@ -225,23 +276,23 @@
                             <h4><i class="fas fa-code"></i> Languages</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy">
                                     Python
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
                                     JavaScript
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" loading="lazy">
                                     SQL
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R" loading="lazy">
                                     R
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy">
                                     Java
                                 </span>
                             </div>
@@ -250,31 +301,31 @@
                             <h4><i class="fas fa-chart-bar"></i> Analytics</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">
-                                    <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" loading="lazy">
                                     Tableau
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" loading="lazy">
                                     Power BI
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.worldvectorlogo.com/logos/snowflake-logo.svg" alt="Snowflake">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAQlBMVEX///+x3/Xu+P2N0vEAruY8uul7zO8bs+crtuiCz/DI6fj4/f4Aq+UAsOZnxu31+/5Zwezi8/ug2fPY7/rC5vdOvus853rZAAAAp0lEQVR4AbSSBQJFERRER47mhf0v9Xd3ag5u4v9FSECK20xpAxitbkJLBzjaK+BNOMJg/CmLibmULSwlM8VTKjJJt4Ek84VW0ec9zP70XW22AkPTDVgNA1Btq/s/NfOIFcY0YYUwZur9z7FkZjcDIaUAzC4zl+PXUye1mJIQaVr9wz4Bj+Hjbx8r9NiUEyfwlhP27uPRfY8d/yhkD4L9IE3eT7DlqAkAQ5cKP7QpAw4AAAAASUVORK5CYII=" alt="Snowflake" loading="lazy">
                                     Snowflake
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks">
+                                    <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" loading="lazy">
                                     Databricks
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="Postgres SQL">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="Postgres SQL" loading="lazy">
                                     Postgres SQL
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SSMS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SSMS" loading="lazy">
                                     SSMS
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" loading="lazy">
                                     Pandas
                                 </span>
                             </div>
@@ -283,27 +334,27 @@
                             <h4><i class="fas fa-cloud"></i> Cloud & Tools</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" loading="lazy">
                                     AWS
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" loading="lazy">
                                     Google Cloud
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure Cloud">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure Cloud" loading="lazy">
                                     Azure Cloud
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://www.gohighlevel.com/hs-fs/hubfs/GoHighLevel%20Brand%20Guidelines/GoHighLevel%20Brand%20Logos/GoHighLevel-Primary-Logo-White.png?width=800&height=203&name=GoHighLevel-Primary-Logo-White.png" alt="GoHighLevel CRM">
+                                    <img src="https://logo.clearbit.com/gohighlevel.com" alt="GoHighLevel CRM" loading="lazy" onerror="this.style.display='none'">
                                     GoHighLevel CRM
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" alt="Salesforce">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" alt="Salesforce" loading="lazy">
                                     Salesforce
                                 </span>
                                 <span class="skill-tag">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
                                     Docker
                                 </span>
                             </div>
@@ -320,22 +371,19 @@
             <p class="companies-title" data-aos="fade-up">Trusted by Leading Organizations</p>
             <div class="companies-logos" data-aos="fade-up" data-aos-delay="100">
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/highlandprimarycare.net" alt="Highland Primary Care" onerror="this.style.display='none'">
+                    <img src="https://storage.googleapis.com/msgsndr/X4ktRlPs76F8F1YBy5SM/media/4127749a-c380-4205-84db-0f5792396a0a.png" alt="Highland Primary Care" loading="lazy">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://www.gohighlevel.com/hs-fs/hubfs/GoHighLevel%20Brand%20Guidelines/GoHighLevel%20Brand%20Logos/GoHighLevel-Primary-Logo-White.png?width=400" alt="HighLevel" style="background: #1a1a1a; padding: 10px;" onerror="this.style.display='none'">
+                    <img src="logos/mytreks_logo.png" alt="MyTreks.ai" loading="lazy">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/primarycareipa.org" alt="Primary Care IPA" onerror="this.style.display='none'">
+                    <img src="logos/accenture.svg" alt="Accenture" loading="lazy">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/thethinkschool.com" alt="Think School" onerror="this.style.display='none'">
+                    <img src="logos/primarycare_ipa_logo.png" alt="Primary Care IPA" loading="lazy">
                 </div>
                 <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" onerror="this.style.display='none'">
-                </div>
-                <div class="company-logo-item">
-                    <img src="https://logo.clearbit.com/mytreks.ai" alt="MyTreks.ai" onerror="this.style.display='none'">
+                    <img src="logos/third-estate.jpeg" alt="Third Estate Ventures" loading="lazy">
                 </div>
             </div>
         </div>
@@ -356,16 +404,17 @@
                     <div class="testimonial-content">
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p class="testimonial-text">
-                            "Chirag is an exceptional AI professional who consistently delivers innovative solutions. His ability to bridge technical complexity with business value made him invaluable to our team. He transformed our healthcare analytics platform, resulting in significant cost savings."
+                            "Chirag is an exceptional <strong>AI</strong> leader who consistently delivers innovative solutions. His ability to bridge technical complexity with business value made him invaluable to our organization. Under his leadership, he transformed our healthcare <strong>analytics</strong> platform and managed cross-functional teams to deliver significant cost savings ahead of schedule."
                         </p>
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+                        <div class="author-avatar shahram-avatar">
+                            <img src="https://storage.googleapis.com/msgsndr/X4ktRlPs76F8F1YBy5SM/media/66df839b5bc48c11c34ce5fd.png" alt="Shahram Sani" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-user" style="display:none;"></i>
                         </div>
                         <div class="author-info">
-                            <h4>Dr. Sarah Johnson</h4>
-                            <p>Director of Healthcare Innovation</p>
+                            <h4>Shahram Sani</h4>
+                            <p>CEO</p>
                             <p class="author-company">Highland Primary Care</p>
                         </div>
                     </div>
@@ -375,16 +424,17 @@
                     <div class="testimonial-content">
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p class="testimonial-text">
-                            "Working with Chirag was a game-changer for our AI initiatives. His deep understanding of LLMs and GenAI, combined with his product mindset, helped us ship features faster than we ever imagined. A true AI product leader."
+                            "Working with Chirag was a game-changer for our <strong>AI</strong> initiatives. His exceptional leadership in managing technical teams, combined with his deep understanding of LLMs and GenAI, helped us ship <strong>product</strong> features faster than we ever imagined. He's not just a technical expert, but an outstanding manager who brings out the best in his team."
                         </p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQH-iiufJ-73vQ/profile-displayphoto-scale_200_200/B56ZmBsNsqJkAc-/0/1758817476120?e=2147483647&v=beta&t=z9UFHR5qD4oTwwonMjesI1NbI-bOBRaE0XxZM9_djTA" alt="Yusra Khan" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-user" style="display:none;"></i>
                         </div>
                         <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>VP of Product</p>
+                            <h4>Yusra Khan</h4>
+                            <p>CEO</p>
                             <p class="author-company">MyTreks.ai</p>
                         </div>
                     </div>
@@ -394,16 +444,17 @@
                     <div class="testimonial-content">
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p class="testimonial-text">
-                            "Chirag's expertise in data analytics and AI is remarkable. He led our team through complex technical challenges with clarity and precision. His work on our LLM-driven risk prediction engine exceeded all expectations."
+                            "Chirag's expertise in data <strong>analytics</strong> and <strong>AI</strong> is remarkable, but what truly sets him apart is his leadership style. He guided our team through complex technical challenges with exceptional clarity and precision. His strategic management of our LLM-driven risk prediction <strong>product</strong> exceeded all expectations and delivered measurable ROI."
                         </p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+                            <img src="https://media.licdn.com/dms/image/v2/C4D03AQE5vEscOwNfBQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1516984583125?e=2147483647&v=beta&t=R2KGMZ9WGfMnZ1yAljmW6V8Zpc9EFV21qabR1tqr22o" alt="Joseph Trapp" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fas fa-user" style="display:none;"></i>
                         </div>
                         <div class="author-info">
-                            <h4>Priya Patel</h4>
-                            <p>Chief Data Officer</p>
+                            <h4>Joe Trapp</h4>
+                            <p>CEO/Founder</p>
                             <p class="author-company">Third Estate Ventures</p>
                         </div>
                     </div>
@@ -426,12 +477,12 @@
                 <!-- Highland Primary Care -->
                 <div class="timeline-item" data-aos="fade-up">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-badge">Current</div>
                     <div class="timeline-content">
+                        <div class="timeline-badge">Current</div>
                         <div class="timeline-date">May 2024 - Present</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/highlandprimarycare.com" alt="Highland Primary Care" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="https://storage.googleapis.com/msgsndr/X4ktRlPs76F8F1YBy5SM/media/4127749a-c380-4205-84db-0f5792396a0a.png" alt="Highland Primary Care" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <i class="fas fa-hospital-user" style="display:none;"></i>
                             </div>
                             <div class="timeline-title-group">
@@ -464,17 +515,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- MyTreks.ai / Vroar -->
                 <div class="timeline-item" data-aos="fade-up" data-aos-delay="50">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-badge">Current</div>
                     <div class="timeline-content">
+                        <div class="timeline-badge">Current</div>
                         <div class="timeline-date">Oct 2024 - Present</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://mytreks.ai/favicon.ico" alt="MyTreks.ai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-brain" style="display:none;"></i>
+                                <img src="logos/mytreks_logo.png" alt="MyTreks.ai" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>AI Product Manager - Strategy</h3>
@@ -514,8 +564,7 @@
                         <div class="timeline-date">Jan 2024 - Jul 2024</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/thirdestateventures.com" alt="Third Estate Ventures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-chart-network" style="display:none;"></i>
+                                <img src="logos/third-estate.jpeg" alt="Third Estate Ventures" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>Lead Business Analyst – Gen AI and Analytics</h3>
@@ -556,8 +605,7 @@
                         <div class="timeline-date">Aug 2023 - Dec 2023</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/primarycareipa.com" alt="Primary Care IPA" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-hospital" style="display:none;"></i>
+                                <img src="logos/primarycare_ipa_logo.png" alt="Primary Care IPA" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>Business Intelligence Analyst</h3>
@@ -597,8 +645,7 @@
                         <div class="timeline-date">Aug 2021 - May 2023</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-building" style="display:none;"></i>
+                                <img src="logos/accenture.svg" alt="Accenture" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>Business Intelligence Analyst</h3>
@@ -635,11 +682,11 @@
                 <div class="timeline-item" data-aos="fade-up" data-aos-delay="250">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
+                        <div class="timeline-badge" style="background: #6366f1;">Concurrent</div>
                         <div class="timeline-date">Jul 2020 - Jul 2021</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/atreyainnovations.com" alt="Atreya Innovations" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-database" style="display:none;"></i>
+                                <img src="logos/atreya.jpeg" alt="Atreya Innovations" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>Data Scientist</h3>
@@ -676,11 +723,11 @@
                 <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
+                        <div class="timeline-badge" style="background: #6366f1;">Concurrent</div>
                         <div class="timeline-date">Oct 2020 - Jun 2021</div>
                         <div class="timeline-header">
                             <div class="company-logo">
-                                <img src="https://logo.clearbit.com/persistent.com" alt="Persistent Systems" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-laptop-code" style="display:none;"></i>
+                                <img src="logos/persistent.svg" alt="Persistent Systems" loading="lazy">
                             </div>
                             <div class="timeline-title-group">
                                 <h3>Data Scientist</h3>
@@ -788,6 +835,9 @@
                                 <span>GPT-4</span>
                                 <span>HIPAA Compliant</span>
                             </div>
+                            <a href="https://www.figma.com/proto/62H6uWCA1sKf6ME08QAEXz/PulseScribe?page-id=0%3A1&node-id=22-797&t=vgzdzuTMSsBYbaPP-1" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Prototype
+                            </a>
                         </div>
                     </div>
                     
@@ -809,6 +859,9 @@
                                 <span>OpenAI</span>
                                 <span>Streamlit</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/Teaching_Assistant_AI" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -830,6 +883,9 @@
                                 <span>LangChain</span>
                                 <span>Vector DB</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/Teaching_Assistant_AI" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -851,6 +907,9 @@
                                 <span>DialogFlow</span>
                                 <span>APIs</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/TRAVELLERA" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -880,6 +939,9 @@
                                 <span>PostgreSQL</span>
                                 <span>AWS</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/local-mart" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -901,6 +963,9 @@
                                 <span>Webhooks</span>
                                 <span>Cloud</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/n8n-linkedin-job-search" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -911,17 +976,20 @@
                         </div>
                         <div class="project-content">
                             <div class="project-tags">
-                                <span class="tag product-tag">Product</span>
-                                <span class="tag">AI Agents</span>
+                                <span class="tag product-tag">Business</span>
+                                <span class="tag">Strategy</span>
                             </div>
                             <h3>Neuroquest</h3>
-                            <p>Advanced AI-powered platform leveraging intelligent agents and retrieval-augmented generation to deliver context-aware solutions and automated workflows.</p>
+                            <p>A startup concept developed through comprehensive market research and business strategy analysis. Focused on AI-powered career guidance and skill development pathways for professionals.</p>
                             <div class="project-tech">
-                                <span>RAG</span>
-                                <span>Vector DB</span>
-                                <span>LLMs</span>
-                                <span>AI Agents</span>
+                                <span>Market Research</span>
+                                <span>Business Strategy</span>
+                                <span>Competitive Analysis</span>
+                                <span>Product Vision</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/NeuroQuest" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> View Documentation
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -951,6 +1019,9 @@
                                 <span>Plotly</span>
                                 <span>Flask</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/insight-bridge" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -972,6 +1043,9 @@
                                 <span>Tableau</span>
                                 <span>Jupyter</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/real-estate-anaytics" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                     
@@ -985,14 +1059,17 @@
                                 <span class="tag analytics-tag">Analytics</span>
                                 <span class="tag">Healthcare</span>
                             </div>
-                            <h3>Healthcare Analytics Platform</h3>
-                            <p>Data-driven platform for patient outcome prediction, resource optimization, and clinical performance monitoring.</p>
+                            <h3>Patient Risk Stratification</h3>
+                            <p>Led comprehensive patient analytics at Primary Care IPA, analyzing 6.5M+ records across 55K patients using Tableau dashboards. Identified high-risk acute cases to optimize care coordination and reduce hospitalization rates.</p>
                             <div class="project-tech">
-                                <span>Python</span>
-                                <span>Power BI</span>
+                                <span>Tableau</span>
                                 <span>SQL</span>
-                                <span>R</span>
+                                <span>Data Analysis</span>
+                                <span>Healthcare Analytics</span>
                             </div>
+                            <a href="https://github.com/chiragkhachane/healthcare-anaytics" target="_blank" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i> See Project
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1013,11 +1090,11 @@
             <div class="figma-showcase" data-aos="fade-up" data-aos-delay="200">
                 <div class="showcase-header">
                     <div class="showcase-title">
-                        <i class="fas fa-mountain"></i>
-                        <h3>MyTreks.ai - AI-Powered Trekking Platform</h3>
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>PulseScribe - AI-Powered Healthcare Documentation</h3>
                     </div>
                     <p class="showcase-description">
-                        Complete product design and user experience for an AI-driven trekking recommendation platform. Features personalized route planning, community engagement, and intelligent itinerary generation.
+                        Complete product design and user experience for an AI-powered medical documentation platform. Features real-time voice-to-text transcription, intelligent clinical note generation, and seamless EHR integration to streamline healthcare workflows.
                     </p>
                     <div class="showcase-tags">
                         <span class="showcase-tag">Product Design</span>
@@ -1027,42 +1104,15 @@
                     </div>
                 </div>
                 
-                <div class="figma-embed-container">
-                    <div class="prototype-controls">
-                        <button class="zoom-btn" id="zoomOut" title="Zoom Out">
-                            <i class="fas fa-search-minus"></i>
-                        </button>
-                        <span class="zoom-level" id="zoomLevel">100%</span>
-                        <button class="zoom-btn" id="zoomIn" title="Zoom In">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <button class="zoom-btn" id="resetZoom" title="Reset">
-                            <i class="fas fa-undo"></i>
-                        </button>
+                <div class="figma-embed-simple">
+                    <div class="figma-scaled-container">
+                        <iframe 
+                            class="figma-scaled-iframe"
+                            src="https://embed.figma.com/proto/62H6uWCA1sKf6ME08QAEXz/PulseScribe?page-id=0%3A1&node-id=22-797&scaling=scale-down&embed-host=share" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
-                    
-                    <div class="iphone-frame">
-                        <div class="iphone-notch"></div>
-                        <div class="iphone-screen" id="iphoneScreen">
-                            <!-- Lazy load iframe to prevent blocking -->
-                            <div id="figmaPlaceholder" class="figma-placeholder">
-                                <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #667eea; margin-bottom: 1rem;"></i>
-                                <p style="color: #555; margin-bottom: 1rem;">MyTreks.ai Mobile Prototype</p>
-                                <button id="loadFigmaBtn" class="load-figma-btn">
-                                    <i class="fas fa-play"></i> Load Interactive Prototype
-                                </button>
-                            </div>
-                            <iframe 
-                                class="figma-prototype" 
-                                id="figmaPrototype"
-                                data-src="https://embed.figma.com/proto/rPQ8CLat7ddtmYNgA39F6G/My-Treks.ai?node-id=6992-85112&scaling=scale-down&page-id=6992%3A83433&starting-point-node-id=6992%3A85112&embed-host=share"
-                                style="display: none;"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="iphone-home-indicator"></div>
-                    </div>
-                    <p class="prototype-hint">💡 Click the button to load the interactive prototype</p>
+                    <p class="prototype-hint">💡 Interactive PulseScribe prototype</p>
                 </div>
             </div>
         </div>
@@ -1164,67 +1214,88 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Chirag Khachane. All rights reserved. | Designed with ❤️ and AI</p>
+                <p>&copy; 2026 Chirag Khachane. All rights reserved.</p>
             </div>
         </div>
     </footer>
     
-    <!-- AI Personal Assistant (Floating Robot) -->
-    <div class="ai-assistant" id="aiAssistant">
-        <div class="assistant-toggle" id="assistantToggle">
-            <div class="robot-icon">
-                <i class="fas fa-user-astronaut"></i>
-            </div>
-            <div class="pulse-ring"></div>
-        </div>
-        <div class="assistant-chat" id="assistantChat">
-            <div class="chat-header">
-                <div class="chat-header-content">
-                    <i class="fas fa-user-astronaut"></i>
+    <!-- AI Assistant - Modern Design -->
+    <div class="ai-assistant-v2" id="aiAssistant">
+        <!-- Toggle Button -->
+        <button class="ai-toggle" id="assistantToggle" aria-label="Open AI Assistant">
+            <svg class="ai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+            <span class="ai-toggle-pulse"></span>
+        </button>
+        
+        <!-- Chat Window -->
+        <div class="ai-chat-window" id="assistantChat">
+            <div class="ai-chat-header">
+                <div class="ai-header-info">
+                    <div class="ai-avatar-mini">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
                     <div>
-                        <h4>Chirag's Personal Assistant</h4>
-                        <span class="status">Online • Ready to Help</span>
+                        <h4>Ask about Chirag</h4>
+                        <span class="ai-status"><span class="status-dot"></span>AI-powered responses</span>
                     </div>
                 </div>
-                <button class="close-chat" id="closeChat">
-                    <i class="fas fa-times"></i>
+                <button class="ai-close" id="closeChat" aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
                 </button>
             </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message bot-message">
-                    <div class="message-avatar">
-                        <i class="fas fa-user-astronaut"></i>
+            
+            <div class="ai-chat-body" id="chatMessages">
+                <!-- Welcome message -->
+                <div class="ai-welcome">
+                    <div class="ai-welcome-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
                     </div>
-                    <div class="message-content">
-                        <p>👋 Hi! I'm Chirag's Personal Assistant. Ask me anything about his experience, projects, or skills!</p>
-                    </div>
+                    <h3>Hi, I'm Chirag's AI</h3>
+                    <p>I can answer questions about his work, projects, and expertise.</p>
                 </div>
-                <div class="quick-prompts" id="quickPrompts">
-                    <button class="prompt-btn" data-prompt="Tell me about Chirag's AI experience">
-                        <i class="fas fa-robot"></i> AI Experience
+                
+                <!-- Quick Actions -->
+                <div class="ai-quick-actions" id="quickPrompts">
+                    <button class="ai-action-btn" data-prompt="What's Chirag's background?">
+                        Background & Experience
                     </button>
-                    <button class="prompt-btn" data-prompt="What projects has Chirag worked on?">
-                        <i class="fas fa-project-diagram"></i> Projects
+                    <button class="ai-action-btn" data-prompt="What projects has he built?">
+                        Featured Projects
                     </button>
-                    <button class="prompt-btn" data-prompt="What are Chirag's key skills?">
-                        <i class="fas fa-code"></i> Skills
+                    <button class="ai-action-btn" data-prompt="What are his AI skills?">
+                        AI & Tech Skills
                     </button>
-                    <button class="prompt-btn" data-prompt="Tell me about Chirag's healthcare experience">
-                        <i class="fas fa-hospital"></i> Healthcare
-                    </button>
-                    <button class="prompt-btn" data-prompt="What's Chirag's educational background?">
-                        <i class="fas fa-graduation-cap"></i> Education
-                    </button>
-                    <button class="prompt-btn" data-prompt="How can I contact Chirag?">
-                        <i class="fas fa-envelope"></i> Contact
+                    <button class="ai-action-btn" data-prompt="Is he available for hire?">
+                        Availability
                     </button>
                 </div>
             </div>
-            <div class="chat-input-container">
-                <input type="text" id="chatInput" placeholder="Ask me anything...">
-                <button id="sendMessage">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            
+            <div class="ai-chat-footer">
+                <div class="ai-input-wrapper">
+                    <input type="text" id="chatInput" placeholder="Type a question..." autocomplete="off">
+                    <button id="sendMessage" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
