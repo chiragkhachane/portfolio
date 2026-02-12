@@ -1,0 +1,12 @@
+# Robots.txt for chiragkhachane.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://chiragkhachane.com/sitemap.xml
+
+# Disallow admin or private paths (none currently)
+# Disallow: /private/
+
+# Crawl-delay (optional, be respectful to crawlers)
+Crawl-delay: 1
