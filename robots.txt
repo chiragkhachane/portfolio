@@ -1,9 +1,9 @@
-# Robots.txt for chiragkhachane.com
+# Robots.txt for chiragkhachane.github.io/portfolio
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://chiragkhachane.com/sitemap.xml
+Sitemap: https://chiragkhachane.github.io/portfolio/sitemap.xml
 
 # Disallow admin or private paths (none currently)
 # Disallow: /private/

@@ -31,9 +31,10 @@
     
     <title>Chirag Khachane | AI Product Leader - Available for Hire</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="Chirag_Profile_Pic_Oct22.png">
-    <link rel="apple-touch-icon" href="Chirag_Profile_Pic_Oct22.png">
+    <!-- Favicon - Optimized -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,6 +64,27 @@
     
     <!-- Preload critical resources -->
     <link rel="preload" href="script.js?v=2080" as="script">
+    <link rel="preload" href="CK_Webiste_image.webp" as="image" type="image/webp" fetchpriority="high">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Chirag Khachane",
+      "url": "https://chiragkhachane.github.io/portfolio/",
+      "image": "https://chiragkhachane.github.io/portfolio/CK_Webiste_image.webp",
+      "jobTitle": "AI Product Leader",
+      "description": "AI Product Leader with 5+ years building ML products. Expertise in AI/ML, product strategy, and data analytics.",
+      "email": "chiragkhachane.ck71@gmail.com",
+      "telephone": "+1-716-617-1669",
+      "sameAs": [
+        "https://linkedin.com/in/chiragkhachane",
+        "https://github.com/chiragkhachane"
+      ],
+      "knowsAbout": ["AI", "Machine Learning", "Product Management", "Data Analytics", "Python", "LLMs", "GenAI"]
+    }
+    </script>
     
     <!-- Calendly - Async loading -->
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
@@ -137,7 +159,10 @@
             <!-- Center - Profile Image -->
             <div class="hero-center">
                 <div class="hero-image-wrapper">
-                    <img src="CK_Webiste_image.png" alt="Chirag Khachane - AI Product Leader" class="hero-profile-image" width="400" height="400">
+                    <picture>
+                        <source srcset="CK_Webiste_image.webp" type="image/webp">
+                        <img src="CK_Webiste_image.png" alt="Chirag Khachane - AI Product Leader" class="hero-profile-image" width="400" height="400" fetchpriority="high" decoding="async">
+                    </picture>
                 </div>
             </div>
             
