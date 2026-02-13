@@ -1220,27 +1220,33 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* Mobile: Static grid with larger logos */
+/* Mobile: Rotating circular layout with larger logos */
 @media (max-width: 768px) {
     .marquee-wrapper {
         max-width: 100%;
         -webkit-mask-image: none;
         mask-image: none;
         overflow: visible;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .marquee-track {
         display: block;
-        width: 100%;
-        animation: none;
+        width: 300px;
+        height: 300px;
+        position: relative;
+        animation: rotateContainer 20s linear infinite;
     }
     
     .marquee-content {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem 1.5rem;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
         padding: 0;
-        justify-items: center;
     }
     
     /* Hide duplicate content on mobile */
@@ -1249,19 +1255,59 @@ body {
     }
     
     .company-logo-item {
-        width: 140px;
-        height: 80px;
+        position: absolute;
+        width: 110px;
+        height: 75px;
+        opacity: 1;
     }
     
     .company-logo-item img {
         max-height: 65px;
-        max-width: 130px;
+        max-width: 100px;
+        animation: counterRotate 20s linear infinite;
     }
     
-    /* Center the 5th item */
-    .marquee-content .company-logo-item:nth-child(5) {
-        grid-column: 1 / -1;
+    /* Center logo */
+    .company-logo-item:nth-child(1) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
     }
+    
+    /* Top-left */
+    .company-logo-item:nth-child(2) {
+        top: 10px;
+        left: 10px;
+    }
+    
+    /* Top-right */
+    .company-logo-item:nth-child(3) {
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Bottom-left */
+    .company-logo-item:nth-child(4) {
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    /* Bottom-right */
+    .company-logo-item:nth-child(5) {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@keyframes rotateContainer {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes counterRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
 }
 
 /* ==================== TESTIMONIALS SECTION ==================== */
@@ -2501,6 +2547,31 @@ body {
     transform-origin: center center;
 }
 
+/* Mobile Figma optimization */
+@media (max-width: 768px) {
+    .figma-scaled-container {
+        height: 70vh;
+        min-height: 500px;
+        max-height: 700px;
+        border-radius: 12px;
+    }
+    
+    .figma-scaled-iframe {
+        transform: scale(1);
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .figma-scaled-container {
+        height: 60vh;
+        min-height: 400px;
+        max-height: 600px;
+        border-radius: 8px;
+    }
+}
+
 .surface-frame {
     position: relative;
     width: 100%;
@@ -2825,6 +2896,56 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .contact-content {
+        gap: 2rem;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    .contact-details h4 {
+        font-size: 1rem;
+    }
+    
+    .contact-details a,
+    .contact-details p {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+    
+    .contact-form-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    
+    .contact-form-container {
+        padding: 1.25rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
 }
 
 .contact-item {
@@ -3683,18 +3804,19 @@ body {
         margin-bottom: 2rem;
     }
     
-    /* Timeline Responsive - Dot on left */
+    /* Timeline Responsive - Dot on left of line */
     .timeline {
         padding: 0 1rem;
+        padding-left: 2rem;
     }
     
     .timeline::before {
-        left: 15px;
+        left: 30px;
     }
     
     .timeline-item {
         justify-content: flex-start !important;
-        padding-left: 45px;
+        padding-left: 50px;
     }
     
     .timeline-item:nth-child(even) {
@@ -3702,10 +3824,10 @@ body {
     }
     
     .timeline-dot {
-        left: 15px;
-        transform: translateX(-50%);
-        width: 14px;
-        height: 14px;
+        left: 20px;
+        transform: translateX(0);
+        width: 16px;
+        height: 16px;
     }
     
     .timeline-content {
