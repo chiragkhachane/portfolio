@@ -1173,7 +1173,7 @@ body {
 }
 
 .company-logo-item {
-    width: 140px;
+    width: 120px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -1189,10 +1189,95 @@ body {
 
 .company-logo-item img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 45px;
+    width: auto;
+    height: auto;
     object-fit: contain;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+}
+
+/* Mobile: 4 corners + 1 center rotating layout */
+@media (max-width: 768px) {
+    .companies-logos {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        display: block;
+        animation: rotateLogos 20s linear infinite;
+    }
+    
+    .company-logo-item {
+        position: absolute;
+        width: 80px;
+        height: 50px;
+    }
+    
+    /* Center logo */
+    .company-logo-item:nth-child(1) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: counterRotate 20s linear infinite;
+    }
+    
+    /* Top-left corner */
+    .company-logo-item:nth-child(2) {
+        top: 0;
+        left: 0;
+        animation: counterRotate 20s linear infinite;
+    }
+    
+    /* Top-right corner */
+    .company-logo-item:nth-child(3) {
+        top: 0;
+        right: 0;
+        left: auto;
+        animation: counterRotate 20s linear infinite;
+    }
+    
+    /* Bottom-left corner */
+    .company-logo-item:nth-child(4) {
+        bottom: 0;
+        top: auto;
+        left: 0;
+        animation: counterRotate 20s linear infinite;
+    }
+    
+    /* Bottom-right corner */
+    .company-logo-item:nth-child(5) {
+        bottom: 0;
+        top: auto;
+        right: 0;
+        left: auto;
+        animation: counterRotate 20s linear infinite;
+    }
+    
+    .company-logo-item img {
+        max-height: 35px;
+    }
+}
+
+@keyframes rotateLogos {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes counterRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Center logo counter-rotate adjustment */
+@media (max-width: 768px) {
+    .company-logo-item:nth-child(1) {
+        animation: counterRotateCenter 20s linear infinite;
+    }
+}
+
+@keyframes counterRotateCenter {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
 /* ==================== TESTIMONIALS SECTION ==================== */
@@ -3288,6 +3373,40 @@ body {
     color: white;
 }
 
+/* Quick Response Buttons */
+.quick-responses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quick-response-btn {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.quick-response-btn:hover {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: #6366f1;
+    color: #c7d2fe;
+    transform: translateY(-1px);
+}
+
+.quick-response-btn:active {
+    transform: translateY(0);
+}
+
 /* Typing Indicator */
 .ai-typing {
     display: flex;
@@ -3580,18 +3699,18 @@ body {
         margin-bottom: 2rem;
     }
     
-    /* Timeline Responsive */
+    /* Timeline Responsive - Dot on left */
     .timeline {
         padding: 0 1rem;
     }
     
     .timeline::before {
-        left: 30px;
+        left: 15px;
     }
     
     .timeline-item {
         justify-content: flex-start !important;
-        padding-left: 60px;
+        padding-left: 45px;
     }
     
     .timeline-item:nth-child(even) {
@@ -3599,8 +3718,10 @@ body {
     }
     
     .timeline-dot {
-        left: 30px;
-        transform: translateX(0);
+        left: 15px;
+        transform: translateX(-50%);
+        width: 14px;
+        height: 14px;
     }
     
     .timeline-content {
@@ -3621,9 +3742,14 @@ body {
     }
     
     .timeline-header {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        text-align: center;
+        text-align: left;
+        gap: 1rem;
+    }
+    
+    .timeline-title-group {
+        text-align: left;
     }
     
     .timeline-date {
@@ -3646,7 +3772,15 @@ body {
     }
     
     .company-logo {
-        margin: 0 auto;
+        margin: 0;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .company-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
     
     .experience-badge {

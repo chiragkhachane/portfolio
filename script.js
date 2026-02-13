@@ -644,10 +644,92 @@ function initAIAssistant() {
         return typingDiv;
     }
     
-    // Add bot message
+    // Quick response suggestions based on context
+    function getQuickResponses(message) {
+        const msg = message.toLowerCase();
+        
+        // After background/experience info
+        if (msg.includes('experience') || msg.includes('career') || msg.includes('background')) {
+            return [
+                { label: 'View Projects', prompt: 'What projects has he built?' },
+                { label: 'Technical Skills', prompt: 'What are his AI skills?' },
+                { label: 'Contact', prompt: 'How can I reach him?' }
+            ];
+        }
+        
+        // After projects info
+        if (msg.includes('project') || msg.includes('built') || msg.includes('portfolio')) {
+            return [
+                { label: 'AI Skills', prompt: 'What are his AI skills?' },
+                { label: 'Experience', prompt: 'What is his background?' },
+                { label: 'Hire Him', prompt: 'Is he available for hire?' }
+            ];
+        }
+        
+        // After skills info
+        if (msg.includes('skill') || msg.includes('tech') || msg.includes('stack')) {
+            return [
+                { label: 'See Projects', prompt: 'What projects has he built?' },
+                { label: 'Experience', prompt: 'What is his background?' },
+                { label: 'Contact', prompt: 'How can I reach him?' }
+            ];
+        }
+        
+        // After availability info
+        if (msg.includes('hire') || msg.includes('available') || msg.includes('opportunity')) {
+            return [
+                { label: 'View Projects', prompt: 'What projects has he built?' },
+                { label: 'Background', prompt: 'What is his experience?' },
+                { label: 'Contact Now', prompt: 'How can I contact him?' }
+            ];
+        }
+        
+        // After contact info
+        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email')) {
+            return [
+                { label: 'See Projects', prompt: 'What projects has he built?' },
+                { label: 'His Skills', prompt: 'What are his technical skills?' },
+                { label: 'Background', prompt: 'What is his experience?' }
+            ];
+        }
+        
+        // After healthcare info
+        if (msg.includes('healthcare') || msg.includes('hipaa') || msg.includes('patient')) {
+            return [
+                { label: 'Other Projects', prompt: 'What other projects has he built?' },
+                { label: 'AI Skills', prompt: 'What are his AI skills?' },
+                { label: 'Hire Him', prompt: 'Is he available for hire?' }
+            ];
+        }
+        
+        // After education info
+        if (msg.includes('education') || msg.includes('degree') || msg.includes('university')) {
+            return [
+                { label: 'Experience', prompt: 'What is his work experience?' },
+                { label: 'Projects', prompt: 'What projects has he built?' },
+                { label: 'Skills', prompt: 'What are his skills?' }
+            ];
+        }
+        
+        // Default suggestions
+        return [
+            { label: 'Experience', prompt: 'What is his background?' },
+            { label: 'Projects', prompt: 'What projects has he built?' },
+            { label: 'Contact', prompt: 'How can I reach him?' }
+        ];
+    }
+    
+    // Add bot message with quick responses
     function addBotMessage(message) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'ai-message';
+        
+        // Get contextual quick responses
+        const quickResponses = getQuickResponses(message);
+        const quickResponsesHtml = quickResponses.map(r => 
+            `<button class="quick-response-btn" data-prompt="${escapeHtml(r.prompt)}">${escapeHtml(r.label)}</button>`
+        ).join('');
+        
         messageDiv.innerHTML = `
             <div class="ai-message-avatar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -658,10 +740,23 @@ function initAIAssistant() {
             </div>
             <div class="ai-message-content">
                 <p>${formatResponse(message)}</p>
+                <div class="quick-responses">${quickResponsesHtml}</div>
             </div>
         `;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add event listeners to quick response buttons
+        messageDiv.querySelectorAll('.quick-response-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const prompt = btn.getAttribute('data-prompt');
+                if (chatInput) {
+                    chatInput.value = prompt;
+                    sendUserMessage();
+                }
+            });
+        });
     }
     
     // Escape HTML
