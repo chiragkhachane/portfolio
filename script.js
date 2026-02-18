@@ -1229,6 +1229,35 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
+// ==================== STICKY MOBILE HIRE BAR ====================
+(function initStickyHireBar() {
+    const bar = document.getElementById('stickyHireBar');
+    if (!bar) return;
+
+    let lastScrollY = 0;
+    let ticking = false;
+
+    const SHOW_THRESHOLD = 400; // px from top before bar appears
+
+    function updateBar() {
+        const y = window.scrollY;
+        if (y > SHOW_THRESHOLD) {
+            bar.classList.add('shb-visible');
+        } else {
+            bar.classList.remove('shb-visible');
+        }
+        lastScrollY = y;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateBar);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+
 // Log page view analytics (placeholder for future implementation)
 function logPageView() {
 }
